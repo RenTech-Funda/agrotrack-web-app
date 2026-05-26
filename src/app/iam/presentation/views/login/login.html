@@ -1,29 +1,54 @@
-<div class="lang-switch" aria-hidden="false">
-  <button class="lang-btn" [class.active]="activeLang === 'en'" (click)="setLanguage('en')" aria-label="English">EN</button>
-  <button class="lang-btn" [class.active]="activeLang === 'es'" (click)="setLanguage('es')" aria-label="Español">ES</button>
+<div class="auth-lang-switch">
+  <button class="auth-lang-btn" [class.active]="activeLang === 'en'"
+          (click)="setLanguage('en')" aria-label="English">EN</button>
+  <button class="auth-lang-btn" [class.active]="activeLang === 'es'"
+          (click)="setLanguage('es')" aria-label="Español">ES</button>
 </div>
 
-<div class="auth-ellipse">
-  <div class="auth-card">
-    <h1 class="logo"><span class="green">Agro</span><span class="orange">Track</span></h1>
+<div class="auth-card">
 
-    <h2>{{ 'auth.login.title' | translate }}</h2>
-    <p class="subtitle">{{ 'auth.login.subtitle' | translate }}</p>
-
-    <form (ngSubmit)="onLogin()" #form="ngForm">
-      <label for="email">{{ 'auth.login.email' | translate }}</label>
-      <input id="email" type="email" [(ngModel)]="email" name="email" required [placeholder]="'auth.login.emailPlaceholder' | translate" />
-
-      <label for="password">{{ 'auth.login.password' | translate }}</label>
-      <div class="password-wrapper">
-        <input id="password" type="password" [(ngModel)]="password" name="password" required [placeholder]="'auth.login.passwordPlaceholder' | translate" />
-      </div>
-
-      <div class="links">
-        <a routerLink="/register">{{ 'auth.login.notRegistered' | translate }}</a>
-      </div>
-
-      <button type="submit" class="primary-btn" [disabled]="store.isLoadingUsers()">{{ 'auth.login.signIn' | translate }}</button>
-    </form>
+  <div class="auth-logo mb-6">
+    <span class="auth-logo__green">Agro</span><span class="auth-logo__orange">Track</span>
   </div>
+
+  <h1 class="text-2xl font-bold text-center mb-2">{{ 'auth.login.title' | translate }}</h1>
+  <p class="text-secondary text-center text-sm mb-6">{{ 'auth.login.subtitle' | translate }}</p>
+
+  <form class="flex-col gap-4" (ngSubmit)="onLogin()" #form="ngForm">
+
+    <div class="form-group">
+      <label class="form-label" for="email">{{ 'auth.login.email' | translate }}</label>
+      <input
+        id="email"
+        class="auth-input"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        [placeholder]="'auth.login.emailPlaceholder' | translate"
+      />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="password">{{ 'auth.login.password' | translate }}</label>
+      <input
+        id="password"
+        class="auth-input"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        [placeholder]="'auth.login.passwordPlaceholder' | translate"
+      />
+    </div>
+
+    <div class="text-center">
+      <a routerLink="/register" class="auth-link">{{ 'auth.login.notRegistered' | translate }}</a>
+    </div>
+
+    <button type="submit" class="auth-submit" [disabled]="store.isLoadingUsers()">
+      {{ 'auth.login.signIn' | translate }}
+    </button>
+
+  </form>
 </div>

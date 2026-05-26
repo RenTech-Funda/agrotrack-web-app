@@ -1,44 +1,67 @@
-<div class="lang-switch" aria-hidden="false">
-  <button class="lang-btn" [class.active]="activeLang === 'en'" (click)="setLanguage('en')" aria-label="English">EN</button>
-  <button class="lang-btn" [class.active]="activeLang === 'es'" (click)="setLanguage('es')" aria-label="Español">ES</button>
+<div class="auth-lang-switch">
+  <button class="auth-lang-btn" [class.active]="activeLang === 'en'"
+          (click)="setLanguage('en')" aria-label="English">EN</button>
+  <button class="auth-lang-btn" [class.active]="activeLang === 'es'"
+          (click)="setLanguage('es')" aria-label="Español">ES</button>
 </div>
 
-<div class="auth-ellipse">
-  <div class="auth-card">
-    <h1 class="logo"><span class="green">Agro</span><span class="orange">Track</span></h1>
+<div class="auth-card">
 
-    <h2>{{ 'auth.register.title' | translate }}</h2>
-    <p class="subtitle">{{ 'auth.register.subtitle' | translate }}</p>
-
-    <form (ngSubmit)="onRegister()" #form="ngForm">
-      <label>{{ 'auth.register.name' | translate }}</label>
-      <input type="text" [(ngModel)]="name" name="name" required [placeholder]="'auth.register.namePlaceholder' | translate" />
-
-      <label>{{ 'auth.register.email' | translate }}</label>
-      <input type="email" [(ngModel)]="email" name="email" required [placeholder]="'auth.register.emailPlaceholder' | translate" />
-
-      <label>{{ 'auth.register.password' | translate }}</label>
-      <input type="password" [(ngModel)]="password" name="password" required [placeholder]="'auth.register.passwordPlaceholder' | translate" />
-
-      <label>{{ 'auth.register.confirmPassword' | translate }}</label>
-      <input
-        type="password"
-        [(ngModel)]="confirmPassword"
-        name="confirmPassword"
-        required
-        [placeholder]="'auth.register.passwordPlaceholder' | translate"
-      />
-
-      <div class="roles">
-        <label><input type="checkbox" [(ngModel)]="roleAgronomist" name="agronomist" (change)="roleFarmer = !roleAgronomist"/> {{ 'auth.register.agronomist' | translate }}</label>
-        <label><input type="checkbox" [(ngModel)]="roleFarmer" name="farmer" (change)="roleAgronomist = !roleFarmer"/> {{ 'auth.register.farmer' | translate }}</label>
-      </div>
-
-      <div class="links">
-        <a routerLink="/login">{{ 'auth.register.alreadyHaveAccount' | translate }}</a>
-      </div>
-
-      <button type="submit" [disabled]="store.isLoadingUsers()" class="primary-btn">{{ 'auth.register.createAccount' | translate }}</button>
-    </form>
+  <div class="auth-logo mb-4">
+    <span class="auth-logo__green">Agro</span><span class="auth-logo__orange">Track</span>
   </div>
+
+  <h1 class="text-xl font-bold text-center mb-1">{{ 'auth.register.title' | translate }}</h1>
+  <p class="text-secondary text-center text-sm mb-5">{{ 'auth.register.subtitle' | translate }}</p>
+
+  <form class="flex-col gap-3" (ngSubmit)="onRegister()" #form="ngForm">
+
+    <div class="form-group">
+      <label class="form-label">{{ 'auth.register.name' | translate }}</label>
+      <input class="auth-input" type="text" [(ngModel)]="name" name="name" required
+             [placeholder]="'auth.register.namePlaceholder' | translate" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">{{ 'auth.register.email' | translate }}</label>
+      <input class="auth-input" type="email" [(ngModel)]="email" name="email" required
+             [placeholder]="'auth.register.emailPlaceholder' | translate" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">{{ 'auth.register.password' | translate }}</label>
+      <input class="auth-input" type="password" [(ngModel)]="password" name="password" required
+             [placeholder]="'auth.register.passwordPlaceholder' | translate" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">{{ 'auth.register.confirmPassword' | translate }}</label>
+      <input class="auth-input" type="password"
+             [(ngModel)]="confirmPassword" name="confirmPassword" required
+             [placeholder]="'auth.register.passwordPlaceholder' | translate" />
+    </div>
+
+    <!-- Role selection: large tap targets for field use -->
+    <div class="auth-roles flex-col gap-2">
+      <label class="auth-role-option">
+        <input type="checkbox" [(ngModel)]="roleAgronomist" name="agronomist"
+               (change)="roleFarmer = !roleAgronomist" />
+        <span>{{ 'auth.register.agronomist' | translate }}</span>
+      </label>
+      <label class="auth-role-option">
+        <input type="checkbox" [(ngModel)]="roleFarmer" name="farmer"
+               (change)="roleAgronomist = !roleFarmer" />
+        <span>{{ 'auth.register.farmer' | translate }}</span>
+      </label>
+    </div>
+
+    <div class="text-center">
+      <a routerLink="/login" class="auth-link">{{ 'auth.register.alreadyHaveAccount' | translate }}</a>
+    </div>
+
+    <button type="submit" class="auth-submit" [disabled]="store.isLoadingUsers()">
+      {{ 'auth.register.createAccount' | translate }}
+    </button>
+
+  </form>
 </div>
