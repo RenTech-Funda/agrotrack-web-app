@@ -1,0 +1,110 @@
+<div class="report-detail-container" *ngIf="report">
+  <button mat-icon-button class="back-button" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon> {{ 'report.detail.back' | translate }}
+  </button>
+
+  <div class="content-layout">
+    <div class="report-card">
+      <div class="card-header">
+        <h2>{{ 'report.detail.title' | translate }} {{ report.id }}</h2>
+        <span class="status-badge" [class]="'status-' + report.status.toLowerCase()">
+          {{ ('report.statuses.' + report.status) | translate }}
+        </span>
+      </div>
+
+      <div class="report-info">
+        <div class="info-group">
+          <div class="info-item">
+            <strong>{{ 'report.columns.organization' | translate }} ID:</strong>
+            <span>{{ report.organizationId }}</span>
+          </div>
+          <div class="info-item">
+            <strong>Plot ID:</strong>
+            <span>{{ report.plotId }}</span>
+          </div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="info-item">
+          <strong>{{ 'report.detail.type' | translate }}:</strong>
+          <span>{{ ('report.types.' + report.type) | translate }}</span>
+        </div>
+
+        <div class="info-item">
+          <strong>{{ 'report.detail.metricType' | translate }}:</strong>
+
+          <span>{{ ('monitoring.types.' + report.metricType) | translate }}</span>
+        </div>
+
+        <hr class="divider">
+
+        <div class="info-item">
+          <strong>{{ 'report.detail.startDate' | translate }}:</strong>
+          <span>{{ report.periodStart | date: 'dd/MM/yyyy' }}</span>
+        </div>
+
+        <div class="info-item">
+          <strong>{{ 'report.detail.endDate' | translate }}:</strong>
+          <span>{{ report.periodEnd | date: 'dd/MM/yyyy' }}</span>
+        </div>
+
+        <div class="info-item" *ngIf="report.generatedAt">
+          <strong>{{ 'report.detail.generatedAt' | translate }}:</strong>
+          <span>{{ report.generatedAt | date: 'medium' }}</span>
+        </div>
+      </div>
+
+      <div class="actions-section">
+        <button mat-raised-button
+                color="primary"
+                class="download-button"
+                (click)="downloadExcel()"
+                [disabled]="report.status !== 'CREATED'">
+          <mat-icon>download</mat-icon>
+          {{ 'report.detail.downloadExcel' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="excel-preview">
+      <h3>{{ 'report.detail.results' | translate }}</h3>
+
+      <div class="metrics-grid" *ngIf="report.reportMetrics && (report.status === 'GENERATED' || report.status === 'CREATED'); else noMetrics">
+
+        <div class="metric-box">
+          <span class="metric-label">{{ 'report.detail.metrics.average' | translate }}</span>
+          <span class="metric-value">{{ report.reportMetrics.averageValue | number:'1.1-2' }}</span>
+        </div>
+
+        <div class="metric-box">
+          <span class="metric-label">{{ 'report.detail.metrics.max' | translate }}</span>
+          <span class="metric-value">{{ report.reportMetrics.maxValue | number:'1.1-2' }}</span>
+        </div>
+
+        <div class="metric-box">
+          <span class="metric-label">{{ 'report.detail.metrics.min' | translate }}</span>
+          <span class="metric-value">{{ report.reportMetrics.minValue | number:'1.1-2' }}</span>
+        </div>
+
+        <div class="metric-box">
+          <span class="metric-label">{{ 'report.detail.metrics.count' | translate }}</span>
+          <span class="metric-value">{{ report.reportMetrics.dataCount }}</span>
+        </div>
+
+      </div>
+
+      <ng-template #noMetrics>
+        <div class="no-data-placeholder">
+          <mat-icon>bar_chart</mat-icon>
+          <p>{{ 'report.detail.processingOrFailed' | translate }}</p>
+        </div>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!report">
+  {{ 'report.detail.notFound' | translate }}
+</div>

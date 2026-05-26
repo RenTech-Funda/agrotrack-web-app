@@ -1,0 +1,61 @@
+<mat-toolbar class="mat-toolbar">
+  <mat-toolbar-row>
+    <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <img ngSrc="assets/images/agrotrack-fullLogo.png" alt="AgroTrack Logo" width="200" height="50"/>
+    <div class="mat-spacer"></div>
+    <app-profile></app-profile>
+    <app-language-switcher></app-language-switcher>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container autosize>
+  <mat-sidenav
+    role="navigation"
+    mode="side"
+    [opened]="true"
+    [class.collapsed]="isCollapsed"
+    [attr.aria-expanded]="!isCollapsed"
+  >
+    <mat-nav-list>
+      @for (opt of options; track opt.route) {
+        <a
+          mat-list-item
+          [routerLink]="opt.route"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [attr.aria-label]="(opt.labelKey | translate)"
+          [matTooltip]="isCollapsed ? (opt.labelKey | translate) : ''"
+          matTooltipPosition="right"
+        >
+          <mat-icon matListItemIcon>{{ opt.icon }}</mat-icon>
+
+          @if (!isCollapsed) {
+            <span matListItemTitle>{{ opt.labelKey | translate }}</span>
+          }
+        </a>
+      }
+
+      <!-- Logout Button -->
+      <a
+        mat-list-item
+        (click)="logout()"
+        class="logout-item"
+        [attr.aria-label]="'Cerrar Sesión'"
+        [matTooltip]="isCollapsed ? 'Cerrar Sesión' : ''"
+        matTooltipPosition="right"
+      >
+        <mat-icon matListItemIcon>logout</mat-icon>
+
+        @if (!isCollapsed) {
+          <span matListItemTitle>Cerrar Sesión</span>
+        }
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

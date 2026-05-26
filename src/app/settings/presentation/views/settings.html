@@ -1,0 +1,142 @@
+<div class="settings-container">
+  <!-- Loading State -->
+  @if (loading && !profile) {
+    <div class="loading-container">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Cargando perfil...</p>
+    </div>
+  }
+
+  <!-- Content State -->
+  @if (profile) {
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>person</mat-icon>
+          Mi Perfil
+        </mat-card-title>
+        <mat-card-subtitle>Administra tu información personal</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- 1. Sección de Foto (Visualización) -->
+        <div class="photo-section">
+          <div class="photo-circle">
+            <!--
+               Si hay photoUrl, intentamos mostrar la imagen.
+               (error): Si falla la carga, reseteamos la URL para mostrar el icono por defecto.
+            -->
+            @if (profile.photoUrl) {
+              <img [src]="profile.photoUrl"
+                   [alt]="profile.fullName"
+                   (error)="profile.photoUrl = ''" />
+            } @else {
+              <mat-icon>person</mat-icon>
+            }
+          </div>
+          <h2 class="user-name">{{ profile.fullName }}</h2>
+        </div>
+
+        <!-- 2. Formulario de Foto (Edición) -->
+        <form [formGroup]="photoForm" class="form-section">
+          <h3>
+            <mat-icon>image</mat-icon>
+            Foto de Perfil
+          </h3>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>URL de la Foto</mat-label>
+            <input matInput formControlName="photoUrl" placeholder="https://ejemplo.com/foto.jpg">
+            <mat-icon matPrefix>link</mat-icon>
+
+            <!-- VALIDACIÓN LIMPIA USANDO EL GETTER 'photoUrlControl' -->
+            @if (photoUrlControl?.hasError('required') && photoUrlControl?.touched) {
+              <mat-error>La URL es requerida</mat-error>
+            }
+            @if (photoUrlControl?.hasError('pattern')) {
+              <mat-error>Debe ser una URL válida (http:// o https://)</mat-error>
+            }
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-stroked-button type="button" (click)="cancelPhotoEdit()">
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+            <button mat-raised-button color="primary" type="button"
+                    (click)="updatePhoto()" [disabled]="photoForm.invalid || loading">
+              <mat-icon>save</mat-icon>
+              Actualizar Foto
+            </button>
+          </div>
+        </form>
+
+        <!-- 3. Formulario de Datos Personales -->
+        <form [formGroup]="profileForm" class="form-section">
+          <h3>
+            <mat-icon>badge</mat-icon>
+            Información Personal
+          </h3>
+
+          <!-- Nombre -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="firstName" placeholder="Ej: Juan">
+            <mat-icon matPrefix>person_outline</mat-icon>
+
+            <!-- VALIDACIÓN LIMPIA USANDO EL GETTER 'firstNameControl' -->
+            @if (firstNameControl?.hasError('required') && firstNameControl?.touched) {
+              <mat-error>El nombre es requerido</mat-error>
+            }
+            @if (firstNameControl?.hasError('minlength')) {
+              <mat-error>Mínimo 2 caracteres</mat-error>
+            }
+          </mat-form-field>
+
+          <!-- Apellido -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="lastName" placeholder="Ej: Pérez">
+            <mat-icon matPrefix>person_outline</mat-icon>
+
+            <!-- VALIDACIÓN LIMPIA USANDO EL GETTER 'lastNameControl' -->
+            @if (lastNameControl?.hasError('required') && lastNameControl?.touched) {
+              <mat-error>El apellido es requerido</mat-error>
+            }
+            @if (lastNameControl?.hasError('minlength')) {
+              <mat-error>Mínimo 2 caracteres</mat-error>
+            }
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-stroked-button type="button" (click)="cancelNameEdit()">
+              <mat-icon>cancel</mat-icon>
+              Cancelar
+            </button>
+            <button mat-raised-button color="primary" type="button"
+                    (click)="updateName()" [disabled]="profileForm.invalid || loading">
+              <mat-icon>save</mat-icon>
+              Actualizar Nombre
+            </button>
+          </div>
+        </form>
+
+        <!-- 4. Información Adicional (Solo lectura) -->
+        <div class="info-section">
+          <h3>
+            <mat-icon>info</mat-icon>
+            Información Adicional
+          </h3>
+          <div class="info-row">
+            <span class="info-label">ID de Usuario:</span>
+            <span class="info-value">{{ profile.userId }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">ID de Perfil:</span>
+            <span class="info-value">{{ profile.profileId }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

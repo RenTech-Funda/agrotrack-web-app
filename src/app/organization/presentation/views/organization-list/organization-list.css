@@ -1,0 +1,80 @@
+.organization-list {
+  padding: 2rem;
+  position: relative;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4rem;
+}
+
+.create-section {
+  margin: 1.5rem 0 2rem 0;
+}
+
+.create-button {
+  font-weight: 500;
+}
+
+.no-organizations {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #777;
+}
+
+.no-org-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #999;
+}
+
+.organization-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.organization-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.organization-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.fab-add {
+  position: fixed;
+  top: 120px;
+  right: 2rem;
+}
+
+/* Estilos personalizados para botones - Selectores más específicos */
+.organization-list .mat-mdc-raised-button.mat-primary {
+  background-color: #4CAF50 !important; /* Verde */
+  color: white !important;
+}
+
+.organization-list .mat-mdc-raised-button.mat-primary:hover {
+  background-color: #45a049 !important; /* Verde más oscuro al hover */
+}
+
+.organization-list .mat-mdc-raised-button.mat-warn {
+  background-color: #f44336 ; /* Rojo para delete */
+  color: white !important;
+}
+
+.organization-list .mat-mdc-raised-button.mat-warn:hover {
+  background-color: #d32f2f !important; /* Rojo más oscuro */
+}
+
+.organization-list .mat-mdc-icon-button.mat-primary {
+  color: #2196F3 !important; /* Azul para el botón de editar */
+}
+
+.organization-list .mat-mdc-icon-button.mat-primary:hover {
+  color: #1976D2 !important;
+  background-color: rgba(33, 150, 243, 0.1) !important;
+}

@@ -1,0 +1,110 @@
+<button mat-icon-button class="back-button" (click)="goBack()">
+  <mat-icon>arrow_back</mat-icon> {{ 'report.create.back' | translate }}
+</button>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ 'report.create.title' | translate }}</mat-card-title>
+    <mat-card-subtitle>{{ 'report.create.subtitle' | translate }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="performCreate()" class="report-form">
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'report.create.organization' | translate }}</mat-label>
+        <mat-select formControlName="organizationId" [placeholder]="'report.create.selectOption' | translate">
+          @for (org of orgStore.organizationsByOwner(); track org.id) {
+            <mat-option [value]="org.id">{{ org.organizationName }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.controls.organizationId.hasError('required')">
+          {{ 'report.create.errors.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'report.create.plot' | translate }}</mat-label>
+        <mat-select formControlName="plotId" [placeholder]="'report.create.selectOption' | translate">
+          @for (plot of orgStore.plotsByOrganization(); track plot.id) {
+            <mat-option [value]="plot.id">
+              {{ plot.id }} - {{ plot.plantTypeDetails?.name || 'Unknown' }}
+            </mat-option>
+          }
+          @if (orgStore.plotsByOrganization().length === 0 && form.controls.organizationId.value) {
+            <mat-option [disabled]="true">{{ 'report.create.errors.noPlots' | translate }}</mat-option>
+          }
+        </mat-select>
+        <mat-error *ngIf="form.controls.plotId.hasError('required')">
+          {{ 'report.create.errors.required' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'report.create.reportType' | translate }}</mat-label>
+          <mat-select formControlName="type">
+            @for (type of reportTypes; track type) {
+              <mat-option [value]="type">{{ ('report.types.' + type) | translate }}</mat-option>
+            }
+          </mat-select>
+          <mat-error *ngIf="form.controls.type.hasError('required')">
+            {{ 'report.create.errors.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'report.create.metricType' | translate }}</mat-label>
+          <mat-select formControlName="metricType">
+            @for (metric of metricTypes; track metric) {
+              <mat-option [value]="metric">{{ ('monitoring.types.' + metric) | translate }}</mat-option>
+            }
+          </mat-select>
+          <mat-error *ngIf="form.controls.metricType.hasError('required')">
+            {{ 'report.create.errors.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'report.create.startDate' | translate }}</mat-label>
+          <input matInput
+                 [matDatepicker]="pickerStart"
+                 formControlName="periodStart"
+                 readonly
+                 (click)="pickerStart.open()"
+                 style="cursor: pointer">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerStart"></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+          <mat-error *ngIf="form.controls.periodStart.hasError('required')">
+            {{ 'report.create.errors.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'report.create.endDate' | translate }}</mat-label>
+          <input matInput
+                 [matDatepicker]="pickerEnd"
+                 formControlName="periodEnd"
+                 readonly
+                 (click)="pickerEnd.open()"
+                 style="cursor: pointer">
+          <mat-datepicker-toggle matIconSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+          <mat-error *ngIf="form.controls.periodEnd.hasError('required')">
+            {{ 'report.create.errors.required' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || orgStore.loading()">
+          <mat-icon>check_circle</mat-icon>
+          {{ (orgStore.loading() ? 'report.create.loading' : 'report.create.generate') | translate }}
+        </button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

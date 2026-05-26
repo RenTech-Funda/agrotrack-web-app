@@ -1,0 +1,205 @@
+<div class="session-detail-container">
+  <!-- Loading State -->
+  @if (monitoringStore.loading()) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>{{ 'plantSessions.loadingDetails' | translate }}</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (monitoringStore.error()) {
+    <mat-card class="error-card">
+      <mat-card-content>
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ monitoringStore.error() }}</p>
+        <button mat-raised-button (click)="goBack()">
+          {{ 'plantSessions.backToList' | translate }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Session Details -->
+  @if (!monitoringStore.loading() && currentSession) {
+    <div class="header-section">
+      <button mat-icon-button (click)="goBack()" [matTooltip]="'plantSessions.backToList' | translate">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h2>{{ 'plantSessions.sessionDetails' | translate }} #{{ currentSession.id }}</h2>
+      <button mat-icon-button color="warn" (click)="deleteSession()" [matTooltip]="'plantSessions.deleteSession' | translate">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <!-- Session Info Card -->
+    <mat-card class="session-info-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>info</mat-icon>
+          {{ 'plantSessions.generalInfo' | translate }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <mat-icon>event</mat-icon>
+            <span class="info-label">{{ 'plantSessions.sampledAt' | translate }}:</span>
+            <span class="info-value">{{ formatDate(currentSession.sampledAt) }}</span>
+          </div>
+          <div class="info-item">
+            <mat-icon>agriculture</mat-icon>
+            <span class="info-label">{{ 'plantSessions.plotId' | translate }}:</span>
+            <span class="info-value">{{ currentSession.plotId }}</span>
+          </div>
+          <div class="info-item">
+            <mat-icon>format_list_numbered</mat-icon>
+            <span class="info-label">{{ 'plantSessions.totalObservations' | translate }}:</span>
+            <span class="info-value">{{ currentSession.observations.length }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Averages Card -->
+    <mat-card class="averages-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>analytics</mat-icon>
+          {{ 'plantSessions.averages' | translate }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="averages-grid">
+          <div class="average-item">
+            <mat-icon>height</mat-icon>
+            <div class="average-content">
+              <span class="average-label">{{ 'plantSessions.avgHeight' | translate }}</span>
+              <span class="average-value">{{ currentSession.average.avgHeightCm }} cm</span>
+            </div>
+          </div>
+          <div class="average-item">
+            <mat-icon>local_florist</mat-icon>
+            <div class="average-content">
+              <span class="average-label">{{ 'plantSessions.avgLeaves' | translate }}</span>
+              <span class="average-value">{{ currentSession.average.avgLeafCount }}</span>
+            </div>
+          </div>
+          <div class="average-item">
+            <mat-icon>spa</mat-icon>
+            <div class="average-content">
+              <span class="average-label">{{ 'plantSessions.avgFruits' | translate }}</span>
+              <span class="average-value">{{ currentSession.average.avgFruitCount }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Observations Table -->
+    <mat-card class="observations-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>list</mat-icon>
+          {{ 'plantSessions.observations' | translate }}
+        </mat-card-title>
+        <button mat-raised-button color="primary" (click)="addObservation()">
+          <mat-icon>add</mat-icon>
+          {{ 'plantSessions.addObservation' | translate }}
+        </button>
+      </mat-card-header>
+
+      <mat-card-content>
+        @if (monitoringStore.observations().length === 0) {
+          <div class="no-observations">
+            <mat-icon>science</mat-icon>
+            <p>{{ 'plantSessions.noObservations' | translate }}</p>
+            <button mat-raised-button color="primary" (click)="addObservation()">
+              <mat-icon>add</mat-icon>
+              {{ 'plantSessions.addFirstObservation' | translate }}
+            </button>
+          </div>
+        } @else {
+          <table mat-table [dataSource]="monitoringStore.observations()" class="observations-table">
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>{{ 'plantSessions.observationId' | translate }}</th>
+              <td mat-cell *matCellDef="let obs">#{{ obs.id }}</td>
+            </ng-container>
+
+            <!-- Height Column -->
+            <ng-container matColumnDef="heightCm">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>height</mat-icon>
+                {{ 'plantSessions.height' | translate }} (cm)
+              </th>
+              <td mat-cell *matCellDef="let obs">{{ obs.heightCm }}</td>
+            </ng-container>
+
+            <!-- Leaf Count Column -->
+            <ng-container matColumnDef="leafCount">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>local_florist</mat-icon>
+                {{ 'plantSessions.leaves' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let obs">{{ obs.leafCount }}</td>
+            </ng-container>
+
+            <!-- Fruit Count Column -->
+            <ng-container matColumnDef="fruitCount">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>spa</mat-icon>
+                {{ 'plantSessions.fruits' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let obs">{{ obs.fruitCount }}</td>
+            </ng-container>
+
+            <!-- Notes Column -->
+            <ng-container matColumnDef="notes">
+              <th mat-header-cell *matHeaderCellDef>{{ 'plantSessions.notes' | translate }}</th>
+              <td mat-cell *matCellDef="let obs">{{ obs.notes || '-' }}</td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>{{ 'plantSessions.actions' | translate }}</th>
+              <td mat-cell *matCellDef="let obs">
+                <button
+                  mat-icon-button
+                  color="primary"
+                  (click)="editObservation(obs.id)"
+                  [matTooltip]="'plantSessions.edit' | translate">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  (click)="deleteObservation(obs.id)"
+                  [matTooltip]="'plantSessions.delete' | translate">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Not Found State -->
+  @if (!monitoringStore.loading() && !currentSession && !monitoringStore.error()) {
+    <mat-card class="not-found-card">
+      <mat-card-content>
+        <mat-icon>search_off</mat-icon>
+        <h3>{{ 'plantSessions.sessionNotFound' | translate }}</h3>
+        <button mat-raised-button color="primary" (click)="goBack()">
+          {{ 'plantSessions.backToList' | translate }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
+

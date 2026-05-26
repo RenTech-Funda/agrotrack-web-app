@@ -1,0 +1,269 @@
+/* --- Layout General --- */
+.report-detail-container {
+  max-width: 1200px;
+  margin: 80px auto 40px;
+  padding: 24px;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+.back-button {
+  background: white;
+  color: #63a880;
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 1px solid #63a880;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-button:hover {
+  background: #63a880;
+  color: #eb9f18;
+  transform: translateX(-4px);
+  box-shadow: 0 4px 6px rgba(99, 168, 128, 0.2);
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr; /* Izquierda fija, derecha flexible */
+  gap: 24px;
+  align-items: start;
+}
+
+
+.report-card,
+.excel-preview {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra más suave y moderna */
+  padding: 24px;
+  border-top: 4px solid #63a880; /* Acento superior verde */
+}
+
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.report-card h2,
+.excel-preview h3 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/* --- Badges de Estado (Status) --- */
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Verde para completado */
+.status-generated {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+/* Naranja para procesos en espera/proceso */
+.status-requested,
+.status-processing {
+  background-color: #fff3e0;
+  color: #ef6c00;
+  border: 1px solid #ffe0b2;
+}
+
+/* Rojo para fallos */
+.status-failed {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ffcdd2;
+}
+
+/* --- Información del Reporte (Izquierda) --- */
+.report-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-group {
+  display: flex;
+  gap: 16px;
+}
+
+.info-group .info-item {
+  flex: 1;
+}
+
+.info-item {
+  padding: 8px 0;
+}
+
+.info-item strong {
+  color: #757575; /* Gris medio para etiquetas */
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.info-item span {
+  color: #212121; /* Gris oscuro para valores */
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: #eeeeee;
+  margin: 8px 0;
+}
+
+/* --- Sección de Acciones (Botón Descargar) --- */
+.actions-section {
+  margin-top: 32px;
+}
+
+.download-button {
+  background-color: #63a880;
+  color: white;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(99, 168, 128, 0.3);
+}
+
+.download-button:disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  box-shadow: none;
+}
+
+.download-button:not([disabled]):hover {
+  background-color: #4e8c68; /* Un verde un poco más oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(99, 168, 128, 0.4);
+}
+
+/* --- Sección Derecha (Métricas / Resultados) --- */
+.metrics-grid {
+  display: grid;
+  /* Crea columnas automáticas que no sean menores a 130px */
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.metric-box {
+  background: #f1f8e9; /* Verde muy claro */
+  border: 1px solid #dcedc8;
+  border-radius: 8px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.metric-box:hover {
+  transform: translateY(-3px);
+  border-color: #63a880;
+}
+
+.metric-label {
+  font-size: 0.75rem;
+  color: #558b2f; /* Verde oliva oscuro */
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2e7d32; /* Verde fuerte */
+}
+
+/* Placeholder cuando no hay datos */
+.no-data-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #bdbdbd;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 2px dashed #e0e0e0;
+}
+
+.no-data-placeholder mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: #ffb74d; /* Naranja suave */
+}
+
+.no-data-placeholder p {
+  margin: 0;
+  font-size: 1rem;
+  color: #757575;
+}
+
+/* --- Not Found (404) --- */
+.not-found {
+  text-align: center;
+  margin: 80px auto;
+  color: #ef6c00; /* Texto Naranja fuerte */
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 40px;
+  background: #fff3e0; /* Fondo Naranja muy claro */
+  border-radius: 12px;
+  border: 1px solid #ffe0b2;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(239, 108, 0, 0.1);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .content-layout {
+    grid-template-columns: 1fr; /* Colapsar a una columna */
+    gap: 24px;
+  }
+
+  .report-card {
+    order: 1; /* Información primero */
+  }
+
+  .excel-preview {
+    order: 2; /* Métricas después */
+  }
+
+  .report-detail-container {
+    margin-top: 60px;
+    padding: 16px;
+  }
+}

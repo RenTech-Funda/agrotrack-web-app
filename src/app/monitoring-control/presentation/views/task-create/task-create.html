@@ -1,0 +1,166 @@
+<div class="task-create-container">
+  <mat-card class="create-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>add_task</mat-icon>
+        Crear Nueva Tarea
+      </mat-card-title>
+      <mat-card-subtitle>Asigna tareas a los miembros de tu organización</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+
+        <!-- Organization Selection -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Organización</mat-label>
+          <mat-select formControlName="organizationId" (selectionChange)="onOrganizationChange($event.value)">
+            @for (org of organizationsFromStore; track org.id) {
+              <mat-option [value]="org.id">{{ org.name }}</mat-option>
+            }
+          </mat-select>
+          <mat-icon matPrefix>business</mat-icon>
+          @if (taskForm.get('organizationId') && taskForm.get('organizationId')!.hasError('required') && taskForm.get('organizationId')!.touched) {
+            <mat-error>Debe seleccionar una organización</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Assigned To Profile Selection -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Asignar a</mat-label>
+          <mat-select formControlName="assignedToProfileId">
+            <!-- Opciones de ejemplo hardcodeadas -->
+            <mat-option [value]="1">
+              <div class="profile-option">
+                <span>Pablo Pérez</span>
+              </div>
+            </mat-option>
+            <mat-option [value]="2">
+              <div class="profile-option">
+                <span>Maria García</span>
+              </div>
+            </mat-option>
+
+            <!-- Opciones dinámicas del store -->
+            @for (profile of profilesFromStore; track profile.profileId) {
+              <mat-option [value]="profile.profileId">
+                <div class="profile-option">
+                  @if (profile.photoUrl) {
+                    <img [src]="profile.photoUrl" [alt]="profile.fullName" class="profile-photo">
+                  }
+                  <span>{{ profile.fullName }}</span>
+                </div>
+              </mat-option>
+            }
+          </mat-select>
+          <mat-icon matPrefix>person</mat-icon>
+          @if (taskForm.get('assignedToProfileId') && taskForm.get('assignedToProfileId')!.hasError('required') && taskForm.get('assignedToProfileId')!.touched) {
+            <mat-error>Debe seleccionar un miembro</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Task Title -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Título de la Tarea</mat-label>
+          <input matInput formControlName="title" placeholder="Ej: Revisar sistema de riego">
+          <mat-icon matPrefix>title</mat-icon>
+          @if (taskForm.get('title') && taskForm.get('title')!.hasError('required') && taskForm.get('title')!.touched) {
+            <mat-error>El título es requerido</mat-error>
+          }
+          @if (taskForm.get('title') && taskForm.get('title')!.hasError('minlength')) {
+            <mat-error>El título debe tener al menos 3 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Task Description -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput formControlName="description" rows="4"
+            placeholder="Describe detalladamente la tarea..."></textarea>
+          <mat-icon matPrefix>description</mat-icon>
+          @if (taskForm.get('description') && taskForm.get('description')!.hasError('required') && taskForm.get('description')!.touched) {
+            <mat-error>La descripción es requerida</mat-error>
+          }
+          @if (taskForm.get('description') && taskForm.get('description')!.hasError('minlength')) {
+            <mat-error>La descripción debe tener al menos 10 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Date Fields -->
+        <div class="date-row">
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Fecha de Inicio</mat-label>
+            <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+            <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+            @if (taskForm.get('startDate') && taskForm.get('startDate')!.hasError('required') && taskForm.get('startDate')!.touched) {
+              <mat-error>La fecha de inicio es requerida</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="date-field">
+            <mat-label>Fecha de Finalización</mat-label>
+            <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+            <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+            @if (taskForm.get('endDate') && taskForm.get('endDate')!.hasError('required') && taskForm.get('endDate')!.touched) {
+              <mat-error>La fecha de finalización es requerida</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Materials Section -->
+        <div class="materials-section">
+          <div class="section-header">
+            <h3>Materiales Utilizados (Opcional)</h3>
+            <button mat-raised-button color="primary" type="button" (click)="addMaterial()">
+              <mat-icon>add</mat-icon>
+              Agregar Material
+            </button>
+          </div>
+
+          <div formArrayName="materials">
+            @for (material of materials.controls; track $index) {
+              <div [formGroupName]="$index" class="material-row">
+                <mat-form-field appearance="outline" class="material-name">
+                  <mat-label>Nombre del Material</mat-label>
+                  <input matInput formControlName="materialName" placeholder="Ej: Fertilizante NPK">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="material-quantity">
+                  <mat-label>Cantidad</mat-label>
+                  <input matInput type="number" formControlName="quantity" step="0.1" min="0.1">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="material-unit">
+                  <mat-label>Unidad</mat-label>
+                  <input matInput formControlName="unit" placeholder="Ej: kg, L, unidades">
+                </mat-form-field>
+
+                <button mat-icon-button color="warn" type="button" (click)="removeMaterial($index)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+
+          @if (materials.length === 0) {
+            <p class="no-materials">No se han agregado materiales. Puedes agregar materiales si la tarea los requiere.</p>
+          }
+        </div>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button (click)="onCancel()">
+        <mat-icon>cancel</mat-icon>
+        Cancelar
+      </button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="taskForm.invalid">
+        <mat-icon>save</mat-icon>
+        Crear Tarea
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

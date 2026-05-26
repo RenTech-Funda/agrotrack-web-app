@@ -1,0 +1,143 @@
+<div class="observation-form-container">
+  <h2>
+    @if (isEditMode()) {
+      {{ 'plantSessions.editObservation' | translate }}
+    } @else {
+      {{ 'plantSessions.addObservation' | translate }}
+    }
+  </h2>
+
+  <!-- Loading State -->
+  @if (monitoringStore.loading()) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>{{ 'plantSessions.saving' | translate }}</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (monitoringStore.error()) {
+    <mat-card class="error-card">
+      <mat-card-content>
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ monitoringStore.error() }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Form -->
+  @if (!monitoringStore.loading()) {
+    <mat-card class="form-card">
+      <mat-card-content>
+        <form #observationForm="ngForm">
+          <!-- Height Field -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'plantSessions.height' | translate }} (cm)</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="formData.heightCm"
+              name="heightCm"
+              min="0"
+              step="0.1"
+              required>
+            <mat-icon matPrefix>height</mat-icon>
+            <mat-hint>{{ 'plantSessions.heightHint' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <!-- Leaf Count Field -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'plantSessions.leafCount' | translate }}</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="formData.leafCount"
+              name="leafCount"
+              min="0"
+              required>
+            <mat-icon matPrefix>local_florist</mat-icon>
+            <mat-hint>{{ 'plantSessions.leafCountHint' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <!-- Fruit Count Field -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'plantSessions.fruitCount' | translate }}</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="formData.fruitCount"
+              name="fruitCount"
+              min="0"
+              required>
+            <mat-icon matPrefix>spa</mat-icon>
+            <mat-hint>{{ 'plantSessions.fruitCountHint' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <!-- Notes Field -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'plantSessions.notes' | translate }}</mat-label>
+            <textarea
+              matInput
+              [(ngModel)]="formData.notes"
+              name="notes"
+              rows="4"
+              maxlength="500"
+              placeholder="{{ 'plantSessions.notesPlaceholder' | translate }}">
+            </textarea>
+            <mat-icon matPrefix>note</mat-icon>
+            <mat-hint align="end">{{ formData.notes.length }} / 500</mat-hint>
+          </mat-form-field>
+
+          <!-- Preview Card -->
+          <div class="preview-card">
+            <h4>{{ 'plantSessions.preview' | translate }}</h4>
+            <div class="preview-grid">
+              <div class="preview-item">
+                <mat-icon>height</mat-icon>
+                <span class="preview-label">{{ 'plantSessions.height' | translate }}:</span>
+                <span class="preview-value">{{ formData.heightCm }} cm</span>
+              </div>
+              <div class="preview-item">
+                <mat-icon>local_florist</mat-icon>
+                <span class="preview-label">{{ 'plantSessions.leaves' | translate }}:</span>
+                <span class="preview-value">{{ formData.leafCount }}</span>
+              </div>
+              <div class="preview-item">
+                <mat-icon>spa</mat-icon>
+                <span class="preview-label">{{ 'plantSessions.fruits' | translate }}:</span>
+                <span class="preview-value">{{ formData.fruitCount }}</span>
+              </div>
+            </div>
+            @if (formData.notes) {
+              <div class="preview-notes">
+                <mat-icon>note</mat-icon>
+                <span>{{ formData.notes }}</span>
+              </div>
+            }
+          </div>
+        </form>
+      </mat-card-content>
+
+      <!-- Form Actions -->
+      <mat-card-actions>
+        <button mat-button (click)="cancel()">
+          <mat-icon>close</mat-icon>
+          {{ 'plantSessions.cancel' | translate }}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="submitForm()"
+          [disabled]="!isFormValid()">
+          <mat-icon>save</mat-icon>
+          @if (isEditMode()) {
+            {{ 'plantSessions.updateObservation' | translate }}
+          } @else {
+            {{ 'plantSessions.saveObservation' | translate }}
+          }
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  }
+</div>
+

@@ -1,0 +1,151 @@
+.observation-form-container {
+  padding: 24px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.observation-form-container h2 {
+  color: #2e7d32;
+  margin-bottom: 24px;
+  font-size: 28px;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+/* Error State */
+.error-card {
+  background-color: #ffebee;
+  margin-bottom: 16px;
+}
+
+.error-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #c62828;
+}
+
+/* Form Card */
+.form-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-card mat-card-content {
+  padding: 24px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Preview Card */
+.preview-card {
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-radius: 12px;
+}
+
+.preview-card h4 {
+  color: #2e7d32;
+  margin-bottom: 16px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.preview-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.preview-item mat-icon {
+  color: #2e7d32;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.preview-label {
+  font-size: 13px;
+  color: #616161;
+}
+
+.preview-value {
+  margin-left: auto;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1b5e20;
+}
+
+.preview-notes {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-top: 12px;
+}
+
+.preview-notes mat-icon {
+  color: #558b2f;
+  margin-top: 2px;
+}
+
+.preview-notes span {
+  flex: 1;
+  font-size: 14px;
+  color: #424242;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Form Actions */
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 16px 24px;
+  border-top: 1px solid #e0e0e0;
+  margin: 0 -24px -24px -24px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  mat-card-actions {
+    flex-direction: column-reverse;
+  }
+
+  mat-card-actions button {
+    width: 100%;
+  }
+}
+

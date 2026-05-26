@@ -1,0 +1,195 @@
+/* Contenedor Principal */
+.report-list-container {
+  max-width: 1200px;
+  margin: 100px auto 40px;
+  padding: 24px;
+}
+
+/* Header de la página (Título y Botón Refresh) */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.header-actions {
+  display: flex;
+  gap: 20px;; /* Espacio entre los botones */
+}
+
+.create-button {
+  background-color: #1b4d3e !important; /* Tu verde oscuro corporativo */
+  color: white !important;
+  border-radius: 25px;
+  padding: 0 24px;
+  height: 42px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espacio entre el icono + y el texto */
+}
+
+h2 {
+  margin: 0;
+  color: #1b4d3e; /* Verde oscuro elegante */
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: -0.5px;
+}
+
+.refresh-button {
+  background-color: #63a880 !important; /* Forzamos el color */
+  color: white !important;
+  border-radius: 25px;
+  padding: 0 24px;
+  height: 42px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(99, 168, 128, 0.3);
+}
+
+/* Sección de Filtros */
+.filters {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.filters label {
+  font-weight: 600;
+  color: #555;
+}
+
+/* Custom Select Styling */
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-select-wrapper select {
+  appearance: none;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  padding: 10px 40px 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  min-width: 220px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: all 0.2s;
+}
+
+.custom-select-wrapper select:focus {
+  border-color: #63a880;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 168, 128, 0.1);
+}
+
+.custom-select-wrapper mat-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  pointer-events: none;
+}
+
+/* --- ESTILOS DE LA TABLA  --- */
+
+.table-container {
+  border-radius: 12px;
+  overflow: hidden; /* Importante para que el header respete los bordes redondos */
+  background: white;
+  border: 1px solid #eee;
+}
+
+table {
+  width: 100%;
+}
+
+/* Header Row (Fondo Verde) */
+.mat-mdc-header-row {
+  background-color: #63a880 !important;
+  height: 56px;
+}
+
+/* Header Cells (Texto Blanco) */
+.mat-mdc-header-cell {
+  color: white !important;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Filas de datos */
+.data-row {
+  transition: background-color 0.2s;
+  height: 60px;
+}
+
+.data-row:hover {
+  background-color: #f9fbf9; /* Verde muy muy pálido al pasar el mouse */
+}
+
+.mat-mdc-cell {
+  color: #444;
+  font-size: 14px;
+  border-bottom-color: #f0f0f0;
+}
+
+/* Estilos Específicos de Columnas */
+.id-cell {
+  font-weight: 700;
+  color: #63a880;
+}
+
+.period-cell {
+  color: #666;
+  display: flex; /* Para alinear el icono y el texto si usas flex en la celda */
+  align-items: center;
+  gap: 8px;
+}
+
+.small-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #999;
+}
+
+/* Badges para el Tipo */
+.type-badge {
+  background-color: #eef4f1;
+  color: #1b4d3e;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Estados */
+.status-indicator {
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.status-created { color: #2196f3; background: #e3f2fd; }
+.status-generated { color: #4caf50; background: #e8f5e9; }
+.status-failing, .status-failed { color: #f44336; background: #ffebee; }
+
+/* Acciones */
+.view-btn {
+  color: #63a880 !important;
+  border-color: #63a880 !important;
+}
+
+/* Loading & No Data */
+.loading-shade, .no-data {
+  padding: 40px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}

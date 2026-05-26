@@ -1,0 +1,100 @@
+<div class="payment-container">
+  <div class="payment-header">
+    <mat-icon class="header-icon">credit_card</mat-icon>
+    <h1>{{ 'organization.payment.title' | translate }}</h1>
+    <p class="organization-name">{{ organizationName }}</p>
+  </div>
+
+  <mat-card class="payment-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar>lock</mat-icon>
+      <mat-card-title>{{ 'organization.payment.paymentInfo' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'organization.payment.securePayment' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="info-banner">
+        <mat-icon>info</mat-icon>
+        <p>{{ 'organization.payment.simulationBanner' | translate }}</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="payment-form">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>{{ 'organization.payment.cardNumber' | translate }}</mat-label>
+          <input
+            matInput
+            formControlName="cardNumber"
+            [placeholder]="'organization.payment.cardNumberPlaceholder' | translate"
+            maxlength="16"
+            (input)="formatCardNumber($event)"
+            required>
+          <mat-icon matPrefix>credit_card</mat-icon>
+          @if (form.get('cardNumber')!.hasError('required')) {
+            <mat-error>{{ 'organization.payment.errors.cardNumberRequired' | translate }}</mat-error>
+          }
+          @if (form.get('cardNumber')!.hasError('pattern') || form.get('cardNumber')!.hasError('minlength')) {
+            <mat-error>{{ 'organization.payment.errors.cardNumberInvalid' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="card-details-row">
+          <mat-form-field appearance="outline" class="expiry-field">
+            <mat-label>{{ 'organization.payment.expiryDate' | translate }}</mat-label>
+            <input
+              matInput
+              formControlName="expiryDate"
+              [placeholder]="'organization.payment.expiryDatePlaceholder' | translate"
+              maxlength="5"
+              (input)="formatExpiryDate($event)"
+              required>
+            <mat-icon matPrefix>calendar_today</mat-icon>
+            @if (form.get('expiryDate')!.hasError('required')) {
+              <mat-error>{{ 'organization.payment.errors.expiryDateRequired' | translate }}</mat-error>
+            }
+            @if (form.get('expiryDate')!.hasError('pattern')) {
+              <mat-error>{{ 'organization.payment.errors.expiryDateInvalid' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="cvv-field">
+            <mat-label>{{ 'organization.payment.cvv' | translate }}</mat-label>
+            <input
+              matInput
+              formControlName="cvv"
+              [placeholder]="'organization.payment.cvvPlaceholder' | translate"
+              maxlength="4"
+              type="password"
+              (input)="formatCVV($event)"
+              required>
+            <mat-icon matPrefix>lock</mat-icon>
+            @if (form.get('cvv')!.hasError('required')) {
+              <mat-error>{{ 'organization.payment.errors.cvvRequired' | translate }}</mat-error>
+            }
+            @if (form.get('cvv')!.hasError('pattern') || form.get('cvv')!.hasError('minlength')) {
+              <mat-error>{{ 'organization.payment.errors.cvvInvalid' | translate }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="actions">
+          <button mat-stroked-button type="button" (click)="goBack()">
+            {{ 'organization.payment.cancel' | translate }}
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="form.invalid || store.loading()">
+            <mat-icon>payment</mat-icon>
+            {{ store.loading() ? ('organization.payment.processing' | translate) : ('organization.payment.completePayment' | translate) }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="security-info">
+    <mat-icon>shield</mat-icon>
+    <p>{{ 'organization.payment.securityInfo' | translate }}</p>
+  </div>
+</div>

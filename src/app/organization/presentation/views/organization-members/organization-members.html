@@ -1,0 +1,51 @@
+<div class="header">
+  <button mat-stroked-button color="primary" (click)="goBack()">
+    <mat-icon style="margin-right:6px;">arrow_back</mat-icon>
+   {{'members.button-back' | translate}}
+  </button>
+  <h2>{{'members.title' | translate}}</h2>
+</div>
+
+<div class="add-member">
+  <mat-form-field appearance="fill" class="select-field">
+    <mat-label>{{'members.select' | translate}}</mat-label>
+    <mat-select [(value)]="selectedProfileId">
+      @for (p of available(); track p.id) {
+        <mat-option [value]="p.id">
+          <img
+            [ngSrc]="p.avatarUrl || 'assets/avatar-default.svg'"
+            width="24" height="24"
+            class="option-avatar"
+          />
+          <span class="option-name">{{ p.name }}</span>
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="addMember()" [disabled]="!selectedProfileId">
+    {{'members.button-add' | translate}}
+  </button>
+</div>
+
+<div class="members-list">
+  @if (members().length === 0) {
+    <p class="empty">No hay miembros aún.</p>
+  } @else {
+    <ul>
+      @for (m of members(); track m.id) {
+        <li class="member-item">
+          <img
+            [ngSrc]="m.avatarUrl || 'assets/avatar-default.svg'"
+            width="36" height="36"
+            class="avatar"
+          />
+          <span class="name">{{ m.name }}</span>
+          <button mat-icon-button color="warn" (click)="removeMember(m.id)" aria-label="Eliminar miembro">
+            <mat-icon>person_remove</mat-icon>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</div>

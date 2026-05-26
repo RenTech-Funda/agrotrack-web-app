@@ -1,0 +1,224 @@
+.session-detail-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.header-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.header-section h2 {
+  flex: 1;
+  color: #2e7d32;
+  font-size: 28px;
+  margin: 0;
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+/* Error State */
+.error-card {
+  background-color: #ffebee;
+  text-align: center;
+  padding: 40px;
+}
+
+.error-card mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: #c62828;
+}
+
+/* Not Found State */
+.not-found-card {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.not-found-card mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #9e9e9e;
+  margin-bottom: 16px;
+}
+
+/* Cards */
+mat-card {
+  margin-bottom: 24px;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+mat-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #2e7d32;
+  font-size: 20px;
+}
+
+/* Session Info Card */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.info-item mat-icon {
+  color: #558b2f;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #616161;
+}
+
+.info-value {
+  margin-left: auto;
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+/* Averages Card */
+.averages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.average-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.average-item mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #2e7d32;
+}
+
+.average-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.average-label {
+  font-size: 14px;
+  color: #616161;
+  margin-bottom: 4px;
+}
+
+.average-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1b5e20;
+}
+
+/* Observations Card */
+.observations-card mat-card-header {
+  background-color: #e8f5e9;
+  padding: 16px;
+  margin: -16px -16px 16px -16px;
+  border-radius: 4px 4px 0 0;
+}
+
+.no-observations {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.no-observations mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #9e9e9e;
+  margin-bottom: 16px;
+}
+
+.no-observations p {
+  color: #757575;
+  margin-bottom: 24px;
+}
+
+/* Observations Table */
+.observations-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.observations-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+.observations-table th mat-icon {
+  vertical-align: middle;
+  margin-right: 4px;
+  font-size: 18px;
+}
+
+.observations-table td {
+  padding: 12px;
+}
+
+.observations-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-section h2 {
+    font-size: 20px;
+  }
+
+  .info-grid,
+  .averages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .average-value {
+    font-size: 20px;
+  }
+
+  .observations-table {
+    font-size: 14px;
+  }
+}
+

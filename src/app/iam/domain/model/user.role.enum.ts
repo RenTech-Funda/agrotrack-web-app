@@ -1,0 +1,6 @@
+
+export enum UserRole {
+  SUPER_ADMIN = 'ROLE_SUPER_ADMIN',
+  AGRONOMIST = 'ROLE_AGRONOMIST',
+  FARMER = 'ROLE_FARMER'
+}

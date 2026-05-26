@@ -1,0 +1,138 @@
+.plant-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.plant-list-container h2 {
+  color: #2e7d32;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 28px;
+  margin-top: 55px;
+}
+
+.add-record-btn {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  transition: all 0.3s;
+  margin-bottom: 30px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-record-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+}
+
+.plant-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.plant-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+}
+
+.plant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.plant-card-header {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.plant-id {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.plant-card-content {
+  padding: 20px;
+}
+
+.plant-card-content p {
+  margin: 12px 0;
+  font-size: 15px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plant-card-content strong {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.no-records {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  border: 2px dashed #ddd;
+}
+
+.no-records p {
+  color: #666;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.form-section {
+  margin-top: 20px;
+}
+
+.back-btn {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+  background: #1976d2;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .plant-list-container {
+    padding: 15px;
+  }
+
+  .plant-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .plant-card-content p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

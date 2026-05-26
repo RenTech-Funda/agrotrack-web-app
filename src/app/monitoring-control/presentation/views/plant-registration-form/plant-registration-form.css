@@ -1,0 +1,282 @@
+.plant-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plant-form-container h2 {
+  color: #2e7d32;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.plant-form-container h3 {
+  color: #2e7d32;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-row label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-row input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.form-row input:focus {
+  outline: none;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  background: #f5f5f5;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 6px;
+  border-left: 4px solid #4caf50;
+  font-size: 14px;
+}
+
+button[type="button"] {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+button[type="button"]:hover {
+  background-color: #1976d2;
+}
+
+.average-card {
+  background: #e8f5e8;
+  border: 1px solid #4caf50;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+.average-card h4 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.average-card p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.average-card strong {
+  color: #2e7d32;
+}
+
+/* Estilos para la sección de sesión */
+.session-section {
+  margin-top: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.session-section h3 {
+  color: #2e7d32;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.session-plants {
+  margin-bottom: 20px;
+}
+
+.session-plant-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border-left: 4px solid #4caf50;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.session-plant-item span {
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+}
+
+.remove-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+  background: #d32f2f;
+}
+
+.session-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.clear-btn {
+  background-color: #ff9800 !important;
+}
+
+.clear-btn:hover {
+  background-color: #f57c00 !important;
+}
+
+/* Estilos mejorados para la card de promedio */
+.average-card {
+  background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+  border: 2px solid #4caf50;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 30px;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.average-card h4 {
+  color: #2e7d32;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.average-card p {
+  margin: 12px 0;
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.final-actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.save-session-btn {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  transition: all 0.3s;
+}
+
+.save-session-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .plant-form-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .form-row input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .session-plant-item {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .session-plant-item span {
+    margin-bottom: 8px;
+  }
+
+  .remove-btn {
+    align-self: flex-end;
+  }
+
+  .session-actions {
+    flex-direction: column;
+  }
+
+  .average-card p {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

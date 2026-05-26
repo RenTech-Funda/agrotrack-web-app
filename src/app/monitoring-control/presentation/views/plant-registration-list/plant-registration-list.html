@@ -1,0 +1,42 @@
+<div class="plant-list-container">
+  <h2>{{ 'PLANT_REGISTRATION.LIST_TITLE' | translate }}</h2>
+
+  @if (!showForm) {
+    <button class="add-record-btn" (click)="showForm = true">
+      {{ 'PLANT_REGISTRATION.ADD_RECORD' | translate }}
+    </button>
+  }
+
+  @if (!showForm && plants.length > 0) {
+    <div class="plant-cards">
+      @for (plant of plants; track plant.id) {
+        <div class="plant-card">
+          <div class="plant-card-header">
+            <span class="plant-id">Registro #{{ plant.id }}</span>
+          </div>
+          <div class="plant-card-content">
+            <p><strong>{{ 'PLANT_REGISTRATION.HEIGHT' | translate }}:</strong> {{ plant.height | number:'1.1-1' }} cm</p>
+            <p><strong>{{ 'PLANT_REGISTRATION.LEAVES' | translate }}:</strong> {{ plant.leaves }}</p>
+            <p><strong>{{ 'PLANT_REGISTRATION.FRUITS' | translate }}:</strong> {{ plant.fruits }}</p>
+            <p><strong>{{ 'PLANT_REGISTRATION.DATE' | translate }}:</strong> {{ plant.date | date:'shortDate' }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  @if (!showForm && plants.length === 0) {
+    <div class="no-records">
+      <p>{{ 'PLANT_REGISTRATION.NO_RECORDS' | translate }}</p>
+    </div>
+  }
+
+  @if (showForm) {
+    <div class="form-section">
+      <button class="back-btn" (click)="showForm = false">
+        ← {{ 'PLANT_REGISTRATION.BACK_TO_LIST' | translate }}
+      </button>
+      <app-plant-registration-form (plantAdded)="onPlantAdded($event)"></app-plant-registration-form>
+    </div>
+  }
+</div>

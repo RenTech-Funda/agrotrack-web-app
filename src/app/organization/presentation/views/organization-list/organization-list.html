@@ -1,0 +1,60 @@
+<div class="organization-list">
+
+  <div class="list-header">
+    <h1>{{ 'organization.title' | translate }}</h1>
+  </div>
+
+  <div class="create-section">
+    <button mat-raised-button color="primary" (click)="navigateToNew()" class="create-button">
+      {{ 'organization.create' | translate }} +
+    </button>
+  </div>
+
+  @if (store.organizationsByOwner().length === 0) {
+    <div class="no-organizations">
+      <mat-icon class="no-org-icon">group_off</mat-icon>
+      <p>{{ 'organization.no-organizations' | translate }}</p>
+    </div>
+  }
+
+
+  @if (store.organizationsByOwner().length > 0) {
+    <div class="organization-grid">
+      @for (org of store.organizationsByOwner(); track org.id) {
+        <mat-card class="organization-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>domain</mat-icon>
+            <mat-card-title>{{ org.organizationName }}</mat-card-title>
+            <mat-card-subtitle>
+              Max Plots: {{ org.maxPlots }}
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>
+              <strong>{{ 'organization.members' | translate }}:</strong>
+              {{ org.profileIds.length }}
+            </p>
+            <p>
+              <strong>{{ 'organization.status' | translate }}:</strong>
+              <span [style.color]="org.isActive ? 'green' : 'red'">
+                {{ org.isActive ? 'Active' : 'Inactive' }}
+              </span>
+            </p>
+            <p>
+              <strong>Organization ID:</strong>
+              {{ org.organizationId }}
+            </p>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="navigateToOrganization(org.organizationId)">
+              {{ 'organization.enter' | translate }}
+            </button>
+
+          </mat-card-actions>
+        </mat-card>
+      }
+    </div>
+  }
+</div>

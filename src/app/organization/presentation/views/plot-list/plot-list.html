@@ -1,0 +1,114 @@
+<div class="plot-list-container">
+  <!-- Main Content: Plots -->
+  <div class="plot-list">
+    <div class="list-header">
+      <h1>{{ 'plot.title' | translate }}</h1>
+    </div>
+
+    <div class="create-section">
+      <button mat-raised-button color="primary" (click)="navigateToNew()" class="create-button">
+        {{ 'plot.create' | translate }} +
+      </button>
+    </div>
+
+    @if (plotsByOrganization().length === 0) {
+      <div class="no-plots">
+        <mat-icon class="no-plot-icon">yard</mat-icon>
+        <p>{{ 'plot.no-plots' | translate }}</p>
+      </div>
+    }
+
+    @if (plotsByOrganization().length > 0) {
+      <div class="plot-grid">
+        @for (plot of plotsByOrganization(); track plot.id) {
+          <mat-card class="plot-card">
+            <mat-card-header>
+              <mat-icon mat-card-avatar>eco</mat-icon>
+              <mat-card-title>{{ plot.plotName }}</mat-card-title>
+              <mat-card-subtitle>
+                @if (plot.plantTypeDetails) {
+                  {{ plot.plantTypeDetails.plantType }} - {{ plot.plantTypeDetails.name }}
+                } @else {
+                  {{ 'plot.plantType' | translate }}: {{ plot.plantTypeId }}
+                }
+              </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+              <p>
+                <strong>{{ 'plot.area' | translate }}:</strong>
+                {{ plot.size | number:'1.2-2' }} {{ plot.unit }}
+              </p>
+              <p>
+                <strong>{{ 'plot.location' | translate }}:</strong>
+                {{ plot.location || ('plot.no-location' | translate) }}
+              </p>
+            </mat-card-content>
+
+            <mat-card-actions>
+              <button mat-raised-button color="warn" (click)="deletePlot(plot.id)">
+                {{ 'plot.delete' | translate }}
+              </button>
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="editPlot(plot.id)"
+                matTooltip="{{ 'plot.edit' | translate }}"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- Sidebar: Organization Members -->
+  <div class="members-sidebar">
+    <mat-card class="members-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>people</mat-icon>
+        <mat-card-title>{{ 'organization.members' | translate }}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div class="add-member-section">
+          <button mat-raised-button color="primary" (click)="openAddMemberDialog()" class="add-member-button">
+            <mat-icon>person_add</mat-icon>
+            {{ 'organization.addMember' | translate }}
+          </button>
+        </div>
+
+        @if (profileMembers().length === 0) {
+          <p class="no-members">{{ 'organization.noMembers' | translate }}</p>
+        }
+
+        @if (profileMembers().length > 0) {
+          <div class="members-list">
+            @for (member of profileMembers(); track member.profileId) {
+              <div class="member-item">
+                <img
+                  [src]="member.photoUrl || 'assets/images/default-avatar.png'"
+                  [alt]="member.fullName"
+                  class="member-avatar"
+                />
+                <div class="member-info">
+                  <p class="member-name">{{ member.fullName }}</p>
+                </div>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  (click)="removeMember(member.profileId)"
+                  matTooltip="{{ 'organization.removeMember' | translate }}"
+                >
+                  <mat-icon>person_remove</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

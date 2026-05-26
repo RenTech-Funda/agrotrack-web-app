@@ -1,0 +1,290 @@
+<div class="session-form-container">
+  <h2>{{ 'plantSessions.createSession' | translate }}</h2>
+
+  <!-- Loading State -->
+  @if (monitoringStore.loading()) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>{{ 'plantSessions.saving' | translate }}</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (monitoringStore.error()) {
+    <mat-card class="error-card">
+      <mat-card-content>
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ monitoringStore.error() }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Form -->
+  @if (!monitoringStore.loading()) {
+    <!-- Organization Selection -->
+    <mat-card class="form-section">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>business</mat-icon>
+          {{ 'organization.title' | translate }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Loading Organizations -->
+        @if (loadingOrganizations()) {
+          <div style="text-align: center; padding: 20px;">
+            <mat-spinner diameter="40" style="margin: 0 auto;"></mat-spinner>
+            <p style="margin-top: 10px; color: #666;">{{ 'plantSessions.loading' | translate }}</p>
+          </div>
+        }
+
+        <!-- Organization Selector -->
+        @if (!loadingOrganizations()) {
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'report.create.organization' | translate }}</mat-label>
+            <mat-select [value]="selectedOrganizationId()" (selectionChange)="onOrganizationChange($event.value)" required>
+              <mat-option [value]="null">{{ 'plantSessions.selectPlotOption' | translate }}</mat-option>
+              @for (org of availableOrganizations(); track org.organizationId) {
+                <mat-option [value]="org.organizationId">
+                  {{ org.organizationName }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          @if (availableOrganizations().length === 0) {
+            <div style="padding: 15px; background-color: #fff3cd; border-radius: 4px; margin-top: 10px;">
+              <p style="color: #856404; margin: 0;">
+                <mat-icon style="vertical-align: middle; margin-right: 8px;">warning</mat-icon>
+                {{ 'plantSessions.noOrganizations' | translate }}
+              </p>
+            </div>
+          }
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Plot Selection -->
+    <mat-card class="form-section">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>agriculture</mat-icon>
+          {{ 'plantSessions.selectPlot' | translate }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Loading Plots -->
+        @if (loadingPlots()) {
+          <div style="text-align: center; padding: 20px;">
+            <mat-spinner diameter="40" style="margin: 0 auto;"></mat-spinner>
+            <p style="margin-top: 10px; color: #666;">{{ 'plantSessions.loading' | translate }}</p>
+          </div>
+        }
+
+        <!-- Error Loading Plots -->
+        @if (plotsError() && !loadingPlots()) {
+          <div style="padding: 20px; background-color: #fff3cd; border-left: 4px solid #ffc107; margin-bottom: 16px;">
+            <p style="color: #856404; margin: 0;">
+              <mat-icon style="vertical-align: middle; margin-right: 8px;">warning</mat-icon>
+              {{ plotsError() }}
+            </p>
+          </div>
+        }
+
+        <!-- No Organization Selected -->
+        @if (!selectedOrganizationId() && !loadingOrganizations()) {
+          <div style="padding: 15px; background-color: #e3f2fd; border-radius: 4px;">
+            <p style="color: #1976d2; margin: 0;">
+              <mat-icon style="vertical-align: middle; margin-right: 8px;">arrow_upward</mat-icon>
+              {{ 'report.create.errors.noPlots' | translate }}
+            </p>
+          </div>
+        }
+
+        <!-- Plot Selector -->
+        @if (selectedOrganizationId() && !loadingPlots() && !plotsError()) {
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'plantSessions.plot' | translate }}</mat-label>
+            <mat-select [(ngModel)]="selectedPlotId" required>
+              <mat-option [value]="null">{{ 'plantSessions.selectPlotOption' | translate }}</mat-option>
+              @for (plot of availablePlots(); track plot.plotId) {
+                <mat-option [value]="plot.plotId">
+                  {{ plot.plotName }}
+                </mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          @if (availablePlots().length === 0) {
+            <div style="padding: 15px; background-color: #e3f2fd; border-radius: 4px; margin-top: 10px;">
+              <p style="color: #1976d2; margin: 0;">
+                <mat-icon style="vertical-align: middle; margin-right: 8px;">info</mat-icon>
+                {{ 'plantSessions.noPlots' | translate }}
+              </p>
+            </div>
+          }
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Add Observation Form -->
+    <mat-card class="form-section">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>add_circle</mat-icon>
+          {{ 'plantSessions.addObservation' | translate }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="observation-form">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'plantSessions.height' | translate }} (cm)</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="currentObservation.heightCm"
+              min="0"
+              step="0.1"
+              required>
+            <mat-icon matPrefix>height</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'plantSessions.leafCount' | translate }}</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="currentObservation.leafCount"
+              min="0"
+              required>
+            <mat-icon matPrefix>local_florist</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'plantSessions.fruitCount' | translate }}</mat-label>
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="currentObservation.fruitCount"
+              min="0"
+              required>
+            <mat-icon matPrefix>spa</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'plantSessions.notes' | translate }}</mat-label>
+            <textarea
+              matInput
+              [(ngModel)]="currentObservation.notes"
+              rows="2"
+              maxlength="500">
+            </textarea>
+            <mat-icon matPrefix>note</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addObservation()"
+          [disabled]="!isObservationValid()">
+          <mat-icon>add</mat-icon>
+          {{ 'plantSessions.addToList' | translate }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Observations List -->
+    <mat-card class="form-section">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>list</mat-icon>
+          {{ 'plantSessions.observationsList' | translate }}
+          <span class="observation-count">({{ observations().length }})</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @if (observations().length === 0) {
+          <div class="empty-observations">
+            <mat-icon>science</mat-icon>
+            <p>{{ 'plantSessions.noObservationsYet' | translate }}</p>
+          </div>
+        } @else {
+          <div class="observations-list">
+            @for (obs of observations(); track obs.tempId) {
+              <div class="observation-item">
+                <div class="observation-data">
+                  <div class="data-item">
+                    <mat-icon>height</mat-icon>
+                    <span>{{ obs.heightCm }} cm</span>
+                  </div>
+                  <div class="data-item">
+                    <mat-icon>local_florist</mat-icon>
+                    <span>{{ obs.leafCount }} {{ 'plantSessions.leaves' | translate }}</span>
+                  </div>
+                  <div class="data-item">
+                    <mat-icon>spa</mat-icon>
+                    <span>{{ obs.fruitCount }} {{ 'plantSessions.fruits' | translate }}</span>
+                  </div>
+                  @if (obs.notes) {
+                    <div class="data-item notes">
+                      <mat-icon>note</mat-icon>
+                      <span>{{ obs.notes }}</span>
+                    </div>
+                  }
+                </div>
+                <button
+                  mat-icon-button
+                  color="warn"
+                  (click)="removeObservation(obs.tempId)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+
+          <!-- Averages Preview -->
+          @if (getAverages(); as avg) {
+            <div class="averages-preview">
+              <h4>{{ 'plantSessions.calculatedAverages' | translate }}</h4>
+              <div class="averages-grid">
+                <div class="avg-item">
+                  <mat-icon>height</mat-icon>
+                  <span class="avg-label">{{ 'plantSessions.avgHeight' | translate }}:</span>
+                  <span class="avg-value">{{ avg.avgHeightCm }} cm</span>
+                </div>
+                <div class="avg-item">
+                  <mat-icon>local_florist</mat-icon>
+                  <span class="avg-label">{{ 'plantSessions.avgLeaves' | translate }}:</span>
+                  <span class="avg-value">{{ avg.avgLeafCount }}</span>
+                </div>
+                <div class="avg-item">
+                  <mat-icon>spa</mat-icon>
+                  <span class="avg-label">{{ 'plantSessions.avgFruits' | translate }}:</span>
+                  <span class="avg-value">{{ avg.avgFruitCount }}</span>
+                </div>
+              </div>
+            </div>
+          }
+        }
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button mat-button (click)="cancel()">
+        <mat-icon>close</mat-icon>
+        {{ 'plantSessions.cancel' | translate }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="submitSession()"
+        [disabled]="!selectedPlotId() || observations().length === 0">
+        <mat-icon>save</mat-icon>
+        {{ 'plantSessions.saveSession' | translate }}
+      </button>
+    </div>
+  }
+</div>
+

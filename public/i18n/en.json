@@ -1,0 +1,565 @@
+{
+  "nav": {
+    "organization": "Organization",
+    "reports": "Reports",
+    "tasks": "Tasks",
+    "settings": "Settings",
+    "monitoring": "Monitoring",
+    "sampling_sessions": "Plant Sampling",
+    "weather": "Weather"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Welcome!",
+      "email": "Name or email:",
+      "password": "Password:",
+      "emailPlaceholder": "example@gmail.com",
+      "passwordPlaceholder": "*********",
+      "signIn": "Sign in",
+      "notRegistered": "Not registered yet? Click here",
+      "error": {
+        "required": "Email and password are required",
+        "invalid": "Inactive user or not found",
+        "generic": "Error logging in"
+      }
+    },
+    "register": {
+      "title": "Create Account",
+      "subtitle": "REGISTER NOW!",
+      "name": "Name:",
+      "email": "Email:",
+      "password": "Password:",
+      "confirmPassword": "Confirm Password:",
+      "namePlaceholder": "Name",
+      "emailPlaceholder": "example@gmail.com",
+      "passwordPlaceholder": "*********",
+      "agronomist": "Agronomist",
+      "farmer": "Farmer",
+      "createAccount": "Create account",
+      "alreadyHaveAccount": "Already have an account? Sign in",
+      "error": {
+        "allRequired": "All fields are required",
+        "passwordMismatch": "Passwords do not match",
+        "roleRequired": "Must select at least one role (Agronomist or Farmer)",
+        "generic": "Error registering user"
+      }
+    }
+  },
+  "report": {
+    "title": "Reports",
+    "create": {
+      "title": "Create New Report",
+      "subtitle": "Generate custom metrics for your plots",
+      "back": "Back to list",
+      "organization": "Organization",
+      "plot": "Plot",
+      "reportType": "Report Type",
+      "metricType": "Metric Type",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "generate": "Generate Report",
+      "loading": "Generating...",
+      "selectOption": "Select an option",
+      "errors": {
+        "required": "This field is required",
+        "noPlots": "No plots found for this organization"
+      }
+    },
+    "refresh": "Refresh",
+    "loading": "Loading reports...",
+    "filterBy": "Filter by Organization:",
+    "allOrganizations": "All organizations",
+    "columns": {
+      "id": "ID",
+      "organization": "Organization",
+      "type": "Type",
+      "status": "Status",
+      "period": "Period",
+      "actions": "Actions"
+    },
+    "actions": {
+      "generate": "Generate",
+      "viewDetail": "View detail"
+    },
+    "detail": {
+      "title": "Report Detail #",
+      "metricType": "Metric Type",
+      "generatedAt": "Generated at",
+      "back": "Back",
+      "type": "Type",
+      "status": "Status",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "downloadExcel": "Download Excel",
+      "results": "Results / Metrics",
+      "processingOrFailed": "Report is processing or failed. No data available.",
+      "metrics": {
+        "average": "Average",
+        "max": "Max Value",
+        "min": "Min Value",
+        "count": "Data Count"
+      },
+      "notFound": "Requested report not found"
+    },
+    "types": {
+      "PARCEL": "Parcel",
+      "GENERAL": "General"
+    },
+    "statuses": {
+      "REQUESTED": "Requested",
+      "PROCESSING": "Processing",
+      "GENERATED": "Generated",
+      "CREATED": "Created",
+      "FAILED": "Failed"
+    }
+  },
+  "organization": {
+    "title": "Organizations",
+    "edit-title": "Edit Organization",
+    "new-title": "New Organization",
+    "name": "Name",
+    "status": "Status",
+    "plan": "Subscription plan",
+    "plan-label": "Plan",
+    "status-active": "Active",
+    "status-inactive": "Inactive",
+    "create": "Create organization",
+    "update": "Update organization",
+    "cancel": "Cancel",
+    "enter": "Enter",
+    "edit": "Edit",
+    "delete": "Delete",
+    "delete-confirm": "Are you sure you want to delete this organization?",
+    "no-organizations": "No organizations registered.",
+    "members": "Members",
+    "addMember": "Add Member",
+    "noMembers": "No members in this organization.",
+    "removeMember": "Remove member",
+    "removeMemberConfirm": "Are you sure you want to remove this member from the organization?",
+    "searchMember": "Search member",
+    "searchMemberPlaceholder": "Search by name or email...",
+    "searchHint": "Type the name or email of the member you want to find",
+    "subscription-end": "Subscription end",
+    "wizard": {
+      "selectPlan": "Select Your Plan",
+      "selectPlanSubtitle": "Choose the plan that best fits your organization",
+      "selectPlanButton": "Select Plan",
+      "selectDuration": "Select Duration",
+      "selectDurationSubtitle": "How long do you want to subscribe?",
+      "selectDurationButton": "Select",
+      "organizationDetails": "Organization Details",
+      "organizationDetailsSubtitle": "Final step: name your organization",
+      "summary": "Summary",
+      "duration": "Duration",
+      "month": "month",
+      "months": "months",
+      "organizationName": "Organization Name",
+      "organizationNameRequired": "Organization name is required",
+      "back": "Back",
+      "creating": "Creating...",
+      "createOrganization": "Create Organization"
+    },
+    "plans": {
+      "AGRO_START": {
+        "name": "Agro Start",
+        "benefits": {
+          "plots": "Up to 5 plots",
+          "monitoring": "Basic monitoring",
+          "support": "Email support"
+        }
+      },
+      "AGRO_SMART": {
+        "name": "Agro Smart",
+        "benefits": {
+          "plots": "Up to 20 plots",
+          "monitoring": "Advanced monitoring",
+          "support": "Priority support",
+          "analytics": "Analytics dashboard"
+        }
+      },
+      "AGRO_EXPERT": {
+        "name": "Agro Expert",
+        "benefits": {
+          "plots": "Unlimited plots",
+          "monitoring": "Premium monitoring",
+          "support": "24/7 support",
+          "analytics": "Advanced analytics",
+          "reports": "Custom reports"
+        }
+      }
+    },
+    "durations": {
+      "1": "1 Month",
+      "3": "3 Months",
+      "12": "12 Months"
+    },
+    "payment": {
+      "title": "Complete Your Subscription Payment",
+      "organizationName": "Organization",
+      "paymentInfo": "Payment Information",
+      "securePayment": "Secure payment processing",
+      "simulationBanner": "This is a simulation. No real payment will be processed.",
+      "cardNumber": "Card Number",
+      "cardNumberPlaceholder": "1234 5678 9012 3456",
+      "expiryDate": "Expiry Date",
+      "expiryDatePlaceholder": "MM/YY",
+      "cvv": "CVV",
+      "cvvPlaceholder": "123",
+      "cancel": "Cancel",
+      "completePayment": "Complete Payment",
+      "processing": "Processing...",
+      "securityInfo": "Your payment information is secure and encrypted",
+      "errors": {
+        "cardNumberRequired": "Card number is required",
+        "cardNumberInvalid": "Card number must be 16 digits",
+        "expiryDateRequired": "Expiry date is required",
+        "expiryDateInvalid": "Format must be MM/YY",
+        "cvvRequired": "CVV is required",
+        "cvvInvalid": "CVV must be 3-4 digits"
+      }
+    },
+    "error": {
+      "name-required": "Organization name is required."
+    }
+  },
+  "plot": {
+    "plantType": "Plant type",
+    "selectPlantType": "Select plant type",
+    "searchPlantType": "Search plant type",
+    "searchPlaceholder": "Type to search...",
+    "addNewPlantType": "Add new type",
+    "newPlantTypeName": "New plant type name",
+    "placeholderNewType": "Example: Quinoa, Yuca, Mango...",
+    "newTitle": "Register new plot",
+    "editTitle": "Edit plot",
+    "name": "Plot name",
+    "area": "Area (hectares)",
+    "unit": "Unit",
+    "location": "Location",
+    "error": {
+      "nameRequired": "Name is required",
+      "areaRequired": "Area is required",
+      "areaMin": "Minimum area must be 0.1 hectares"
+    },
+    "title": "Registered plots",
+    "create": "Add plot",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete this plot?",
+    "edit": "Edit",
+    "no-plots": "No plots registered.",
+    "no-location": "No location registered"
+  },
+  "actions": {
+    "save": "Save",
+    "update": "Update",
+    "cancel": "Cancel",
+    "back": "Back"
+  },
+  "custom": "Custom",
+  "monitoring": {
+    "title": "Environmental Monitoring",
+    "new-reading": "New Reading",
+    "readings-list": "Readings List",
+    "readings-found": "readings found",
+    "active-alerts": "Active Alerts",
+    "clear-alerts": "Clear Alerts",
+    "no-readings": "No readings registered",
+    "organization-plots": "Organization Plots",
+    "plot": "Plot",
+    "type": "Type",
+    "value": "Value",
+    "unit": "Unit",
+    "measuredAt": "Measurement Date",
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading readings...",
+    "form": {
+      "title": "Register Environmental Reading",
+      "subtitle": "Register a new environmental reading to monitor your crops",
+      "plotSection": "Select Plot",
+      "typeSection": "Reading Type",
+      "valueSection": "Measurement Value",
+      "dateSection": "Date and Time",
+      "plotHint": "Select the plot where the reading will be taken",
+      "dateHint": "The reading will be registered with the current date and time",
+      "saving": "Saving...",
+      "selectType": "Please select a reading type",
+      "enterValue": "Enter a valid value",
+      "success": "Reading saved successfully"
+    },
+    "types": {
+      "TEMPERATURE": "Temperature",
+      "HUMIDITY": "Humidity",
+      "PH_LEVEL": "pH Level"
+    },
+    "hints": {
+      "temperature": "Normal range: 15-35°C",
+      "humidity": "Normal range: 40-80%",
+      "ph": "Normal range: 5.5-7.5 pH"
+    },
+    "placeholders": {
+      "temperature": "Ex: 25.5",
+      "humidity": "Ex: 65.2",
+      "ph": "Ex: 6.8",
+      "value": "Enter the value"
+    },
+    "time": {
+      "moment": "A moment ago",
+      "minutes": "{{count}} min ago",
+      "hours": "{{count}} hours ago",
+      "days": "{{count}} days ago",
+      "week": "More than a week ago"
+    }
+  },
+  "tasks": {
+    "title": "Agricultural Tasks List",
+    "subtitle": "Tasks assigned by the agronomist",
+    "assignedBy": "Assigned by:",
+    "dueDate": "Due date:",
+    "filters": {
+      "status": "Status",
+      "organization": "Organization",
+      "startDate": "From",
+      "endDate": "To",
+      "clearFilters": "Clear date filters",
+      "all": "All",
+      "allOrganizations": "All"
+    },
+    "status": {
+      "pending": "Pending",
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "PENDING": "Pending",
+      "IN_PROGRESS": "In Progress",
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "assignNewTask": "Assign New Task",
+    "details": {
+      "organization": "Organization:",
+      "startDate": "Start Date:",
+      "endDate": "End Date:",
+      "materials": "Materials:",
+      "moreMaterials": "more materials",
+      "loading": "Loading..."
+    },
+    "viewDetails": "View Details",
+    "emptyState": {
+      "title": "No tasks match the filters",
+      "subtitle": "Try changing the filters to see more tasks"
+    },
+    "categories": {
+      "irrigation": "Irrigation",
+      "fertilization": "Fertilization",
+      "pest_control": "Pest Control",
+      "harvest": "Harvest",
+      "soil_preparation": "Soil Preparation",
+      "monitoring": "Monitoring",
+      "maintenance": "Maintenance"
+    },
+    "list": {
+      "task1": {
+        "title": "Check drip irrigation system",
+        "description": "Inspect all drippers and verify there are no obstructions in the main lines.",
+        "category": "irrigation"
+      },
+      "task2": {
+        "title": "Apply NPK 15-15-15 fertilizer",
+        "description": "Apply 50kg per hectare of NPK fertilizer to tomato plots. Water immediately after application.",
+        "category": "fertilization"
+      },
+      "task3": {
+        "title": "Monitor for aphids presence",
+        "description": "Check the underside of leaves for aphids. Document any signs of infestation.",
+        "category": "pest_control"
+      },
+      "task4": {
+        "title": "Measure soil pH in north plot",
+        "description": "Take 5 soil samples at 15cm depth and measure pH. Record results.",
+        "category": "monitoring"
+      },
+      "task5": {
+        "title": "Prune dry branches on fruit trees",
+        "description": "Remove dead, diseased or inward-growing branches from fruit trees.",
+        "category": "maintenance"
+      },
+      "task6": {
+        "title": "Prepare planting beds",
+        "description": "Till soil, incorporate compost and form 1.2m wide beds for new planting.",
+        "category": "soil_preparation"
+      },
+      "task7": {
+        "title": "Harvest mature lettuce",
+        "description": "Harvest lettuce that has reached commercial size. Cut during cool hours of the day.",
+        "category": "harvest"
+      },
+      "task8": {
+        "title": "Apply preventive fungus treatment",
+        "description": "Spray preventive fungicide on susceptible crops. Use personal protective equipment.",
+        "category": "pest_control"
+      }
+    },
+    "actions": {
+      "markCompleted": "Mark as completed",
+      "markPending": "Mark as pending",
+      "viewDetails": "View details"
+    }
+  },
+  "PLANT_REGISTRATION": {
+    "TITLE": "Plot plant registration",
+    "ORGANIZATION": "Organization",
+    "PLOT": "Plot",
+    "SELECT_ORGANIZATION": "Select an organization",
+    "SELECT_PLOT": "Select a plot",
+    "NO_PLOTS_AVAILABLE": "No plots available for this organization",
+    "HEIGHT": "Height (cm)",
+    "LEAVES": "Number of leaves",
+    "FRUITS": "Number of fruits",
+    "DATE": "Registration date",
+    "ADD": "Add plant",
+    "ADD_TO_SESSION": "Add to session",
+    "ADD_RECORD": "Add record",
+    "LIST_TITLE": "Registered plants",
+    "SESSION_PLANTS": "Plants in this session",
+    "CALCULATE_AVERAGE": "Calculate average",
+    "CLEAR_SESSION": "Clear session",
+    "AVERAGE_TITLE": "Sample average",
+    "PLANTS_COUNT": "Number of plants",
+    "SAVE_SESSION": "Save averaged record",
+    "NO_RECORDS": "No plant records available",
+    "BACK_TO_LIST": "Back to list"
+  },
+  "weather": {
+    "title": "Weather Status",
+    "subtitle": "Meteorological monitoring for agriculture",
+    "location": "Current Location",
+    "defaultLocation": "Peru",
+    "loading": "Loading weather data...",
+    "refresh": "Refresh weather",
+    "changeLocation": "Change location",
+    "locationLabel": "City or region",
+    "locationPlaceholder": "Ex: Lima, Arequipa, Cusco, Peru",
+    "locationInstruction": "Enter your city, region or country name to get local weather.",
+    "applyLocation": "Apply location",
+    "status": {
+      "optimal": "Optimal conditions",
+      "suboptimal": "Non-optimal conditions"
+    },
+    "alerts": {
+      "title": "Weather Alerts",
+      "frost_risk": "⚠️ Frost risk - Protect sensitive crops",
+      "heat_stress": "🔥 Extreme heat stress - Critical risk for crops",
+      "cold_warning": "❄️ Low temperatures - Monitor crops closely",
+      "high_heat": "☀️ High heat - Increase irrigation frequency",
+      "storm_warning": "⛈️ Storm in progress - Suspend outdoor activities",
+      "flooding_risk": "💧 Flooding risk - Check drainage systems",
+      "strong_winds": "💨 Strong winds - Check supports and structures"
+    },
+    "recommendations": {
+      "title": "Agricultural Recommendations",
+      "protect_frost": "🛡️ Cover sensitive crops with thermal blankets or plastic",
+      "avoid_watering_morning": "⏰ Avoid watering in morning hours to prevent freezing",
+      "increase_irrigation": "💧 Increase irrigation frequency due to heat",
+      "provide_shade": "🌳 Provide artificial shade for delicate crops",
+      "optimal_growth": "✅ Ideal temperature for growth of most crops",
+      "suspend_irrigation": "🚫 Suspend scheduled irrigation due to rain",
+      "check_drainage": "🔍 Verify that drainage systems are working properly",
+      "monitor_soil_moisture": "📊 Monitor soil moisture levels regularly",
+      "water_evening": "🌙 Water in evening/night hours to reduce evaporation",
+      "postpone_activities": "⏸️ Postpone field activities until the storm passes",
+      "secure_structures": "🔒 Secure greenhouses, nets and temporary structures",
+      "check_supports": "🌱 Check stakes and supports for tall plants"
+    },
+    "info": {
+      "title": "Temperature Ranges for Crops",
+      "optimal_range": "Optimal Range",
+      "warning_range": "Caution",
+      "danger_range": "Danger"
+    },
+    "empty": {
+      "title": "No data available",
+      "subtitle": "Could not load weather data",
+      "action": "Retry"
+    }
+  },
+  "page-not-found": {
+    "title": "Page not found",
+    "content": "The path <strong>{{ invalid_path }}</strong> is not valid.",
+    "go-home": "Go Home"
+  },
+  "members": {
+    "button-back": "Go back to organization",
+    "title": "Organization members",
+    "button-add": "Add",
+    "select": "Select a profile"
+  },
+  "plantSessions": {
+    "title": "Plant Sampling Sessions",
+    "session": "Session",
+    "sessions": "sessions",
+    "loading": "Loading sessions...",
+    "loadingDetails": "Loading session details...",
+    "saving": "Saving...",
+    "noOrganizations": "No organizations available",
+    "createOrganizationFirst": "Create an organization first to start sampling",
+    "goToOrganizations": "Go to Organizations",
+    "noPlots": "No plots registered for this organization",
+    "noSessionsForPlot": "No sampling sessions for this plot",
+    "createFirst": "Create first session",
+    "addSession": "Add New Session",
+    "viewDetails": "View Details",
+    "delete": "Delete",
+    "deleteSession": "Delete Session",
+    "deleteConfirm": "Are you sure you want to delete this sampling session? This action cannot be undone.",
+    "backToList": "Back to List",
+    "sessionDetails": "Session Details",
+    "generalInfo": "General Information",
+    "sampledAt": "Sampled At",
+    "plotId": "Plot ID",
+    "totalObservations": "Total Observations",
+    "averages": "Calculated Averages",
+    "avgHeight": "Avg. Height",
+    "avgLeaves": "Avg. Leaves",
+    "avgFruits": "Avg. Fruits",
+    "observations": "Plant Observations",
+    "observationId": "ID",
+    "height": "Height",
+    "leaves": "Leaves",
+    "fruits": "Fruits",
+    "notes": "Notes",
+    "actions": "Actions",
+    "edit": "Edit",
+    "addObservation": "Add Observation",
+    "addFirstObservation": "Add First Observation",
+    "noObservations": "No observations registered yet",
+    "sessionNotFound": "Session not found",
+    "createSession": "Create Sampling Session",
+    "selectPlot": "Select Plot",
+    "plot": "Plot",
+    "selectPlotOption": "Select a plot",
+    "addToList": "Add to List",
+    "observationsList": "Observations List",
+    "noObservationsYet": "No observations added yet. Add plants to calculate averages.",
+    "calculatedAverages": "Calculated Averages",
+    "saveSession": "Save Session",
+    "cancel": "Cancel",
+    "editObservation": "Edit Observation",
+    "saveObservation": "Save Observation",
+    "updateObservation": "Update Observation",
+    "leafCount": "Leaf Count",
+    "fruitCount": "Fruit Count",
+    "heightHint": "Measure plant height in centimeters",
+    "leafCountHint": "Count total number of leaves",
+    "fruitCountHint": "Count visible fruits",
+    "notesPlaceholder": "Additional observations about the plant...",
+    "preview": "Preview",
+    "samples": "samples"
+  }
+}

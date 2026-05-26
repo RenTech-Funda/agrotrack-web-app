@@ -1,0 +1,149 @@
+<div class="reading-list-container">
+  <!-- Header section -->
+  <div class="list-header" style="margin-top: 45px !important;">
+    <h1>{{ 'monitoring.title' | translate }}</h1>
+    <button mat-raised-button color="primary" [routerLink]="['/monitoring/new']">
+      <mat-icon>add</mat-icon>
+      {{ 'monitoring.new-reading' | translate }}
+    </button>
+  </div>
+
+  <!-- Loading indicator -->
+  @if (organizationStore.loading()) {
+    <div class="loading">
+      <mat-icon>refresh</mat-icon>
+      <p>{{ 'monitoring.loading' | translate }}</p>
+    </div>
+  }
+
+  <!-- Active Alerts -->
+  @if (monitoringStore.alerts().length > 0) {
+    <mat-card class="alert-banner">
+      <mat-card-header>
+        <mat-icon>warning</mat-icon>
+        <mat-card-title>{{ 'monitoring.active-alerts' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul>
+          @for (alert of monitoringStore.alerts(); track alert) {
+            <li>{{ alert }}</li>
+          }
+        </ul>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-stroked-button color="warn" (click)="clearAlerts()">
+          <mat-icon>clear_all</mat-icon>
+          {{ 'monitoring.clear-alerts' | translate }}
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  }
+
+  <!-- No organizations message -->
+  @if (organizationStore.organizationsByOwner().length === 0 && !organizationStore.loading()) {
+    <div class="no-readings">
+      <mat-icon>business</mat-icon>
+      <p>{{ 'monitoring.no-organizations' | translate }}</p>
+      <small>{{ 'monitoring.no-organizations-subtitle' | translate }}</small>
+    </div>
+  }
+
+  <!-- Organizations with Plots and Readings -->
+  @if (activeOrganizations().length > 0) {
+    <div class="organizations-container">
+      <mat-accordion>
+        @for (org of activeOrganizations(); track org.organizationId) {
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>business</mat-icon>
+                {{ org.organizationName }}
+              </mat-panel-title>
+              <mat-panel-description>
+                <mat-icon>eco</mat-icon>
+                {{ 'monitoring.organization-plots' | translate }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <!-- Plots for this organization -->
+            <div class="plots-section">
+              @for (plot of getPlotsForOrganization(org.organizationId); track plot.plotId) {
+                  <mat-card class="plot-card">
+                    <mat-card-header>
+                      <mat-icon mat-card-avatar>landscape</mat-icon>
+                      <mat-card-title>{{ plot.plotName }}</mat-card-title>
+                      <mat-card-subtitle>
+                        {{ plot.size }} {{ plot.unit }} - {{ plot.location || 'Sin ubicación' }}
+                      </mat-card-subtitle>
+                    </mat-card-header>
+
+                    <mat-card-content>
+                      <!-- Readings table for this plot -->
+                      @if (getReadingsForPlot(plot.plotId).length > 0) {
+                        <div class="table-wrapper">
+                          <table mat-table [dataSource]="getReadingsForPlot(plot.plotId)" class="readings-table">
+                            <!-- Type Column -->
+                            <ng-container matColumnDef="type">
+                              <th mat-header-cell *matHeaderCellDef>
+                                <mat-icon>category</mat-icon>
+                                {{ 'monitoring.type' | translate }}
+                              </th>
+                              <td mat-cell *matCellDef="let reading">
+                                <div class="type-badge" [class]="getTypeClass(reading.type)">
+                                  <mat-icon [class]="getTypeIconClass(reading.type)">{{ getTypeIcon(reading.type) }}</mat-icon>
+                                  {{ getTypeDisplayName(reading.type) }}
+                                </div>
+                              </td>
+                            </ng-container>
+
+                            <!-- Value Column -->
+                            <ng-container matColumnDef="value">
+                              <th mat-header-cell *matHeaderCellDef>
+                                <mat-icon>speed</mat-icon>
+                                {{ 'monitoring.value' | translate }}
+                              </th>
+                              <td mat-cell *matCellDef="let reading">
+                                <div class="value-display">
+                                  <span class="value-number">{{ reading.value }}</span>
+                                  <span class="value-unit">{{ reading.unit }}</span>
+                                </div>
+                              </td>
+                            </ng-container>
+
+                            <!-- MeasuredAt Column -->
+                            <ng-container matColumnDef="measuredAt">
+                              <th mat-header-cell *matHeaderCellDef>
+                                <mat-icon>schedule</mat-icon>
+                                {{ 'monitoring.measuredAt' | translate }}
+                              </th>
+                              <td mat-cell *matCellDef="let reading">
+                                <div class="date-display">
+                                  <span class="date-primary">{{ reading.measuredAt | date:'short':'es' }}</span>
+                                  <small class="date-relative">{{ getRelativeTime(reading.measuredAt) }}</small>
+                                </div>
+                              </td>
+                            </ng-container>
+
+                            <!-- Table Header and Rows -->
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                [class]="getRowClass(row)"
+                                (click)="onRowClick(row)"></tr>
+                          </table>
+                        </div>
+                      } @else {
+                        <div class="no-readings-plot">
+                          <mat-icon>info_outline</mat-icon>
+                          <p>No hay lecturas para este plot</p>
+                        </div>
+                      }
+                    </mat-card-content>
+                  </mat-card>
+              }
+            </div>
+          </mat-expansion-panel>
+        }
+      </mat-accordion>
+    </div>
+  }
+</div>

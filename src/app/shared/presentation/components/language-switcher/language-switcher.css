@@ -1,0 +1,41 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+mat-button-toggle-group {
+  background-color: #f5f7fa;
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease-in-out;
+}
+
+mat-button-toggle-group:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
+}
+
+mat-button-toggle {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  padding: 0.2rem 0.6rem;
+  color: #444;
+  border: none;
+  background: transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+mat-button-toggle:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+mat-button-toggle.mat-button-toggle-checked {
+  background-color: #42933e; /* color principal */
+  color: white;
+}
+
+

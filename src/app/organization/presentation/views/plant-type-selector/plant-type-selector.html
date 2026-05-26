@@ -1,0 +1,37 @@
+<mat-form-field>
+  <mat-label>{{ 'plot.plantType' | translate }}</mat-label>
+  <mat-select
+    [value]="selectedPlantType"
+    (selectionChange)="selectPlantType($event.value)">
+    @for (type of store.planttypes(); track type.id){
+      <mat-option [value]="type">
+        {{type.name}}
+        @if (type.isCustom){
+          <span class="custom-tag">({{'custom' | translate}})</span>
+        }
+      </mat-option>
+    }
+    <mat-option (click)="enableAddCustomPlantType()">
+      {{ 'plot.addNewPlantType' | translate }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+@if (addingCustomPlantType()) {
+  <div class="custom-plant-type-form">
+    <mat-form-field>
+      <mat-label>{{ 'plot.newPlantTypeName' | translate }}</mat-label>
+      <input matInput
+             [(ngModel)]="newTypeNameValue"
+             placeholder="{{ 'plot.placeholderNewType' | translate }}"/>
+    </mat-form-field>
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="addCustomPlantType()">
+        {{ 'actions.save' | translate }}
+      </button>
+      <button mat-stroked-button color="warn" (click)="cancelAddCustomPlantType()">
+        {{ 'actions.cancel' | translate }}
+      </button>
+    </div>
+  </div>
+}

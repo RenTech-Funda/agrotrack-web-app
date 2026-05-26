@@ -1,0 +1,29 @@
+<div class="lang-switch" aria-hidden="false">
+  <button class="lang-btn" [class.active]="activeLang === 'en'" (click)="setLanguage('en')" aria-label="English">EN</button>
+  <button class="lang-btn" [class.active]="activeLang === 'es'" (click)="setLanguage('es')" aria-label="Español">ES</button>
+</div>
+
+<div class="auth-ellipse">
+  <div class="auth-card">
+    <h1 class="logo"><span class="green">Agro</span><span class="orange">Track</span></h1>
+
+    <h2>{{ 'auth.login.title' | translate }}</h2>
+    <p class="subtitle">{{ 'auth.login.subtitle' | translate }}</p>
+
+    <form (ngSubmit)="onLogin()" #form="ngForm">
+      <label for="email">{{ 'auth.login.email' | translate }}</label>
+      <input id="email" type="email" [(ngModel)]="email" name="email" required [placeholder]="'auth.login.emailPlaceholder' | translate" />
+
+      <label for="password">{{ 'auth.login.password' | translate }}</label>
+      <div class="password-wrapper">
+        <input id="password" type="password" [(ngModel)]="password" name="password" required [placeholder]="'auth.login.passwordPlaceholder' | translate" />
+      </div>
+
+      <div class="links">
+        <a routerLink="/register">{{ 'auth.login.notRegistered' | translate }}</a>
+      </div>
+
+      <button type="submit" class="primary-btn" [disabled]="store.isLoadingUsers()">{{ 'auth.login.signIn' | translate }}</button>
+    </form>
+  </div>
+</div>

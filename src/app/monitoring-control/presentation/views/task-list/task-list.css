@@ -1,0 +1,316 @@
+.task-list-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 80px auto 20px;
+}
+
+/* Header Styles */
+.header {
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 8px 0 0 0;
+}
+
+/* Action Bar */
+.action-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Filters Card */
+.filters-card {
+  margin-bottom: 24px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  box-shadow: none;
+}
+
+.filters-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.clear-filters-btn {
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+/* Tasks Grid */
+.tasks-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
+
+/* Task Card Styles */
+.task-card {
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s ease;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  max-height: 450px;
+}
+
+.task-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+/* Task Header */
+.task-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.task-title-section {
+  flex: 1;
+}
+
+.task-title {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+}
+
+.chips-container {
+  margin-top: 8px;
+}
+
+.chips-container mat-chip-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.chips-container mat-chip ::ng-deep .mdc-evolution-chip__text-label {
+  color: #ffffff !important; /* Forzamos blanco */
+  
+  /* Flexbox para asegurar que el texto se centre verticalmente respecto al icono */
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 2. Forzar color en el ICONO */
+.chips-container mat-chip ::ng-deep .mat-icon {
+  color: #ffffff !important; /* Forzamos blanco */
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  
+  /* Alineación: quitamos márgenes extraños y centramos */
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* 3. Asegurar que el contenedor interno del contenido esté centrado */
+.chips-container mat-chip ::ng-deep .mdc-evolution-chip__action-primary {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-left: 8px !important;  /* Ajuste fino de padding */
+    padding-right: 8px !important;
+}
+
+/* Task Content */
+mat-card-content {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 280px;
+}
+
+.task-description {
+  margin: 12px 0;
+  color: #555;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Task Details */
+.task-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+
+.detail-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #666;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #666;
+  min-width: 100px;
+}
+
+.detail-value {
+  color: #333;
+  flex: 1;
+}
+
+/* Materials Section */
+.materials-section {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.materials-section .detail-icon,
+.materials-section .detail-label {
+  display: inline-block;
+}
+
+.materials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-left: 28px;
+  margin-top: 6px;
+  max-height: 50px;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.material-item {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.more-materials {
+  font-size: 0.8rem;
+  color: #999;
+  font-style: italic;
+  margin-left: 28px;
+  margin-top: 4px;
+}
+
+/* Action Buttons */
+mat-card-actions {
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px solid #f0f0f0;
+}
+
+.action-button {
+  flex: 1;
+  min-width: 120px;
+}
+
+.action-button mat-icon {
+  margin-right: 6px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #ccc;
+  margin-bottom: 12px;
+}
+
+.empty-state h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #666;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .task-list-container {
+    padding: 16px;
+  }
+
+  .tasks-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters-row {
+    flex-direction: column;
+  }
+
+  .filter-field {
+    min-width: 100%;
+  }
+
+  .task-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .task-checkbox {
+    margin-top: 0;
+  }
+
+  .detail-item {
+    flex-wrap: wrap;
+  }
+
+  .detail-label {
+    min-width: 80px;
+  }
+
+  mat-card-actions {
+    flex-direction: column;
+  }
+
+  .action-button {
+    width: 100%;
+  }
+}
+
+

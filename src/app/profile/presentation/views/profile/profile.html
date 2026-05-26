@@ -1,0 +1,9 @@
+<div class="profile-container">
+  @if (!avatarUrl()) {
+    <mat-icon class="avatar-icon">account_circle</mat-icon>
+  } @else {
+    <img [src]="avatarUrl()" alt="Avatar" class="avatar-img" />
+  }
+
+  <span class="profile-name">{{ name() }}</span>
+</div>

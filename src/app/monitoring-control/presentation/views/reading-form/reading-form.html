@@ -1,0 +1,163 @@
+<div class="reading-form-container">
+  <!-- Header Section -->
+  <div class="form-header">
+    <h1>{{ 'monitoring.form.title' | translate }}</h1>
+    <p class="subtitle">{{ 'monitoring.form.subtitle' | translate }}</p>
+  </div>
+
+  <!-- Main Form -->
+  <form [formGroup]="form" (ngSubmit)="submit()" class="reading-form" [class.form-loading]="isSubmitting">
+
+    <!-- Organization Selection Section -->
+    <div class="form-section">
+      <div class="section-title">
+        <mat-icon>business</mat-icon>
+        Organización
+      </div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Selecciona una organización</mat-label>
+        <mat-select formControlName="organizationId" required (selectionChange)="onOrganizationChange($event.value)">
+          @for (org of organizations; track org.organizationId) {
+            <mat-option [value]="org.organizationId">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <mat-icon>business</mat-icon>
+                {{ org.organizationName }}
+              </div>
+            </mat-option>
+          }
+        </mat-select>
+        <mat-icon matPrefix>business</mat-icon>
+        <mat-hint>Primero selecciona la organización</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!-- Plot Selection Section -->
+    <div class="form-section">
+      <div class="section-title">
+        <mat-icon>landscape</mat-icon>
+        {{ 'monitoring.form.plotSection' | translate }}
+      </div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'monitoring.plot' | translate }}</mat-label>
+        <mat-select formControlName="plotId" required>
+          @for (plot of plots; track plot.plotId) {
+            <mat-option [value]="plot.plotId">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <mat-icon>place</mat-icon>
+                {{ plot.plotName }} - {{ plot.location }}
+              </div>
+            </mat-option>
+          }
+        </mat-select>
+        <mat-icon matPrefix>landscape</mat-icon>
+        <mat-hint>{{ 'monitoring.form.plotHint' | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!-- Reading Type Selection Section -->
+    <div class="form-section">
+      <div class="section-title">
+        <mat-icon>category</mat-icon>
+        {{ 'monitoring.form.typeSection' | translate }}
+      </div>
+      <div class="type-selection">
+        @for (type of readingTypes; track type.value) {
+          <div class="type-card"
+               [class.selected]="form.get('type')?.value === type.value"
+               (click)="selectReadingType(type.value)">
+            <mat-icon [style.color]="getTypeIconColor(type.value)">{{ getTypeIcon(type.value) }}</mat-icon>
+            <div class="type-name">{{ type.label }}</div>
+          </div>
+        }
+      </div>
+      @if (form.get('type')?.invalid && form.get('type')?.touched) {
+        <div class="form-errors">
+          <mat-icon>error</mat-icon>
+          {{ 'monitoring.form.selectType' | translate }}
+        </div>
+      }
+    </div>
+
+    <!-- Value and Unit Section -->
+    <div class="form-section">
+      <div class="section-title">
+        <mat-icon>speed</mat-icon>
+        {{ 'monitoring.form.valueSection' | translate }}
+      </div>
+      <div class="value-input-group">
+        <mat-form-field appearance="outline" class="value-input">
+          <mat-label>{{ 'monitoring.value' | translate }}</mat-label>
+          <input matInput type="number"
+                 formControlName="value"
+                 required
+                 [placeholder]="getValuePlaceholder()"
+                 step="0.1">
+          <mat-icon matPrefix>speed</mat-icon>
+          <mat-hint>{{ getValueHint() }}</mat-hint>
+          @if (form.get('value')?.invalid && form.get('value')?.touched) {
+            <mat-error>{{ 'monitoring.form.enterValue' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="unit-input">
+          <mat-label>{{ 'monitoring.unit' | translate }}</mat-label>
+          <input matInput formControlName="unit" required readonly>
+          <mat-icon matPrefix>straighten</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- Unit Suggestions -->
+      @if (getUnitSuggestions().length > 0) {
+        <div class="unit-suggestions">
+          @for (unit of getUnitSuggestions(); track unit) {
+            <span class="unit-chip" (click)="selectUnit(unit)">{{ unit }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Date and Time Section -->
+    <div class="form-section">
+      <div class="section-title">
+        <mat-icon>schedule</mat-icon>
+        {{ 'monitoring.form.dateSection' | translate }}
+      </div>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ 'monitoring.measuredAt' | translate }}</mat-label>
+        <input matInput [value]="getCurrentDateTime()" readonly>
+        <mat-icon matPrefix>today</mat-icon>
+        <mat-hint>{{ 'monitoring.form.dateHint' | translate }}</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <!-- Actions Section -->
+    <div class="actions">
+      <button mat-stroked-button
+              type="button"
+              class="cancel-btn"
+              (click)="cancel()"
+              [disabled]="isSubmitting">
+        <mat-icon>close</mat-icon>
+        {{ 'monitoring.cancel' | translate }}
+      </button>
+
+      <button mat-raised-button
+              type="submit"
+              class="save-btn"
+              [disabled]="form.invalid || isSubmitting">
+        @if (isSubmitting) {
+          <ng-container>
+            <mat-icon>refresh</mat-icon>
+            {{ 'monitoring.form.saving' | translate }}
+          </ng-container>
+        } @else {
+          <ng-container>
+            <mat-icon>save</mat-icon>
+            {{ 'monitoring.save' | translate }}
+          </ng-container>
+        }
+      </button>
+    </div>
+
+  </form>
+</div>

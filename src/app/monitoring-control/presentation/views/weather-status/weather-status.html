@@ -1,0 +1,209 @@
+<div class="weather-status-container">
+
+  <div class="list-header">
+    <!-- Header -->
+    <div class="header">
+      <h1 class="title">{{ 'weather.title' | translate }}</h1>
+      <p class="subtitle">{{ 'weather.subtitle' | translate }}</p>
+    </div>
+    <!-- Location Change Button -->
+    <div class="location-controls">
+      <button mat-raised-button color="accent" (click)="toggleLocationForm()">
+        <mat-icon>location_on</mat-icon>
+        {{ 'weather.changeLocation' | translate }}
+      </button>
+    </div>
+
+    <!-- Location Form -->
+    @if (showLocationForm()) {
+      <div class="location-modal-backdrop">
+        <mat-card class="location-form-card">
+          <mat-card-content>
+            <p class="form-instruction">{{ 'weather.locationInstruction' | translate }}</p>
+            <mat-form-field appearance="outline" class="location-input">
+              <mat-label>{{ 'weather.locationLabel' | translate }}</mat-label>
+              <input matInput
+                     [(ngModel)]="customLocation"
+                     [placeholder]="'weather.locationPlaceholder' | translate"
+                     (keyup.enter)="updateLocation()">
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+            <div class="form-actions">
+              <button mat-raised-button color="primary" (click)="updateLocation()" [disabled]="!customLocation().trim()">
+                <mat-icon>check</mat-icon>
+                {{ 'weather.applyLocation' | translate }}
+              </button>
+              <button mat-stroked-button (click)="cancelLocationChange()">
+                <mat-icon>close</mat-icon>
+                {{ 'actions.cancel' | translate }}
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    }
+    <!-- Weather Data -->
+    <!-- Loading State -->
+    @if (monitoringStore.weatherLoading()) {
+      <div class="loading-state">
+        <mat-icon class="loading-icon">refresh</mat-icon>
+        <p>{{ 'weather.loading' | translate }}</p>
+      </div>
+    }
+
+  </div>
+
+
+  @if (monitoringStore.weather() && !monitoringStore.weatherLoading()) {
+    <div class="weather-content">
+      <!-- Main Weather Card -->
+      <mat-card class="weather-main-card">
+        <mat-card-header>
+          <div class="weather-header">
+            <mat-icon class="weather-icon" [class]="getTemperatureClass(monitoringStore.weather()!.temperature)">
+              {{ getWeatherIcon(monitoringStore.weather()!.condition) }}
+            </mat-icon>
+            <div class="weather-info">
+              <h2 class="location">
+                <mat-icon class="location-pin">location_on</mat-icon>
+                {{ currentLocation() || ('weather.defaultLocation' | translate) }}
+              </h2>
+              <p class="timestamp">{{ getCurrentDateTime() | date:'medium' }}</p>
+            </div>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content>
+          <!-- Temperature Display -->
+          <div class="temperature-display">
+            <span class="temperature-value" [class]="getTemperatureClass(monitoringStore.weather()!.temperature)">
+              {{ monitoringStore.weather()!.temperature }}°C
+            </span>
+            <span class="condition-text">{{ monitoringStore.weather()!.condition }}</span>
+          </div>
+
+          <!-- Temperature Status Badge -->
+          <div class="status-badge-container">
+            @if (isOptimalTemperature(monitoringStore.weather()!.temperature)) {
+              <mat-chip-set>
+                <mat-chip color="primary" highlighted>
+                  <mat-icon>check_circle</mat-icon>
+                  {{ 'weather.status.optimal' | translate }}
+                </mat-chip>
+              </mat-chip-set>
+            } @else {
+              <mat-chip-set>
+                <mat-chip color="warn" highlighted>
+                  <mat-icon>warning</mat-icon>
+                  {{ 'weather.status.suboptimal' | translate }}
+                </mat-chip>
+              </mat-chip-set>
+            }
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="refreshWeather()">
+            <mat-icon>refresh</mat-icon>
+            {{ 'weather.refresh' | translate }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- Right Column with all secondary cards -->
+      <div class="right-column">
+        <!-- Alerts Section -->
+        @if (getAlerts(monitoringStore.weather()!.temperature, monitoringStore.weather()!.condition).length > 0) {
+          <mat-card class="alerts-card">
+            <mat-card-header>
+              <div class="alerts-header">
+                <mat-icon class="alert-icon">warning</mat-icon>
+                <mat-card-title>{{ 'weather.alerts.title' | translate }}</mat-card-title>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="alerts-list">
+                @for (alert of getAlerts(monitoringStore.weather()!.temperature, monitoringStore.weather()!.condition); track alert) {
+                  <div class="alert-item">
+                    <mat-icon class="alert-item-icon">error</mat-icon>
+                    <span class="alert-text">{{ alert | translate }}</span>
+                  </div>
+                }
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        <!-- Recommendations Section -->
+        @if (getRecommendations(monitoringStore.weather()!.temperature, monitoringStore.weather()!.condition).length > 0) {
+          <mat-card class="recommendations-card">
+            <mat-card-header>
+              <div class="recommendations-header">
+                <mat-icon class="recommendation-icon">lightbulb</mat-icon>
+                <mat-card-title>{{ 'weather.recommendations.title' | translate }}</mat-card-title>
+              </div>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="recommendations-list">
+                @for (recommendation of getRecommendations(monitoringStore.weather()!.temperature, monitoringStore.weather()!.condition); track recommendation) {
+                  <div class="recommendation-item">
+                    <mat-icon class="recommendation-item-icon">check_circle_outline</mat-icon>
+                    <span class="recommendation-text">{{ recommendation | translate }}</span>
+                  </div>
+                }
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        <!-- Temperature Ranges Info Card -->
+        <mat-card class="info-card">
+          <mat-card-header>
+            <mat-icon class="info-icon">info</mat-icon>
+            <mat-card-title>{{ 'weather.info.title' | translate }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="temp-ranges">
+              <div class="temp-range-item optimal">
+                <mat-icon>thermostat</mat-icon>
+                <div class="range-info">
+                  <span class="range-label">{{ 'weather.info.optimal_range' | translate }}</span>
+                  <span class="range-value">15°C - 30°C</span>
+                </div>
+              </div>
+              <div class="temp-range-item warning">
+                <mat-icon>warning</mat-icon>
+                <div class="range-info">
+                  <span class="range-label">{{ 'weather.info.warning_range' | translate }}</span>
+                  <span class="range-value">10°C - 15°C / 30°C - 35°C</span>
+                </div>
+              </div>
+              <div class="temp-range-item danger">
+                <mat-icon>dangerous</mat-icon>
+                <div class="range-info">
+                  <span class="range-label">{{ 'weather.info.danger_range' | translate }}</span>
+                  <span class="range-value">&lt; 10°C / &gt; 35°C</span>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  }
+
+  <!-- Empty State -->
+  @if (!monitoringStore.weather() && !monitoringStore.weatherLoading()) {
+    <div class="empty-state">
+      <mat-icon class="empty-icon">cloud_off</mat-icon>
+      <h3>{{ 'weather.empty.title' | translate }}</h3>
+      <p>{{ 'weather.empty.subtitle' | translate }}</p>
+      <button mat-raised-button color="primary" (click)="refreshWeather()">
+        <mat-icon>refresh</mat-icon>
+        {{ 'weather.empty.action' | translate }}
+      </button>
+    </div>
+  }
+</div>
+

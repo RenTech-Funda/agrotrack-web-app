@@ -1,0 +1,567 @@
+{
+  "nav": {
+    "organization": "Organización",
+    "reports": "Reportes",
+    "tasks": "Tareas",
+    "settings": "Ajustes",
+    "monitoring": "Monitoreo",
+    "sampling_sessions": "Muestreo de Plantas",
+    "weather": "Clima"
+  },
+  "auth": {
+    "login": {
+      "title": "Iniciar Sesión",
+      "subtitle": "¡Bienvenido!",
+      "email": "Nombre o email:",
+      "password": "Contraseña:",
+      "emailPlaceholder": "ejemplo@gmail.com",
+      "passwordPlaceholder": "*********",
+      "signIn": "Iniciar sesión",
+      "notRegistered": "¿No tienes cuenta? Haz clic aquí",
+      "error": {
+        "required": "Email y contraseña son requeridos",
+        "invalid": "Usuario inactivo o no encontrado",
+        "generic": "Error al iniciar sesión"
+      }
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "subtitle": "¡REGÍSTRATE AHORA!",
+      "name": "Nombre:",
+      "email": "Email:",
+      "password": "Contraseña:",
+      "confirmPassword": "Confirmar Contraseña:",
+      "namePlaceholder": "Nombre",
+      "emailPlaceholder": "ejemplo@gmail.com",
+      "passwordPlaceholder": "*********",
+      "agronomist": "Agrónomo",
+      "farmer": "Agricultor",
+      "createAccount": "Crear cuenta",
+      "alreadyHaveAccount": "¿Ya tienes cuenta? Iniciar sesión",
+      "error": {
+        "allRequired": "Todos los campos son requeridos",
+        "passwordMismatch": "Las contraseñas no coinciden",
+        "roleRequired": "Debe seleccionar al menos un rol (Agrónomo o Agricultor)",
+        "generic": "Error al registrar usuario"
+      }
+    }
+  },
+  "report": {
+    "title": "Reportes",
+    "create": {
+      "title": "Crear nuevo informe",
+      "subtitle": "Genera métricas personalizadas para tus parcelas",
+      "back": "Volver a la lista",
+      "organization": "Organización",
+      "plot": "Parcela",
+      "reportType": "Tipo de informe",
+      "metricType": "Tipo de métrica",
+      "startDate": "Fecha de inicio",
+      "endDate": "Fecha de fin",
+      "generate": "Generar informe",
+      "loading": "Generando...",
+      "selectOption": "Selecciona una opción",
+      "errors": {
+        "required": "Este campo es obligatorio",
+        "noPlots": "No se encontraron parcelas para esta organización"
+      }
+    },
+
+    "refresh": "Actualizar",
+    "loading": "Cargando reportes...",
+    "filterBy": "Filtrar por Organización:",
+    "allOrganizations": "Todas las organizaciones",
+    "columns": {
+      "id": "ID",
+      "organization": "Organización",
+      "type": "Tipo",
+      "status": "Estado",
+      "period": "Periodo",
+      "actions": "Acciones"
+    },
+    "actions": {
+      "generate": "Generar",
+      "viewDetail": "Ver detalle"
+    },
+    "detail": {
+      "title": "Detalle del Reporte #",
+      "metricType": "Tipo de Métrica",
+      "generatedAt": "Generado el",
+      "back": "Volver",
+      "type": "Tipo",
+      "status": "Estado",
+      "startDate": "Fecha Inicio",
+      "endDate": "Fecha Fin",
+      "downloadExcel": "Descargar Excel",
+      "results": "Resultados / Métricas",
+      "processingOrFailed": "El reporte se está procesando o falló. No hay datos disponibles.",
+      "metrics": {
+        "average": "Promedio",
+        "max": "Valor Máx",
+        "min": "Valor Mín",
+        "count": "Registros"
+      },
+      "notFound": "No se encontró el reporte solicitado"
+    },
+    "types": {
+      "PARCEL": "Parcela",
+      "GENERAL": "General"
+    },
+    "statuses": {
+      "REQUESTED": "Solicitado",
+      "PROCESSING": "Procesando",
+      "GENERATED": "Generado",
+      "CREATED": "Creado",
+      "FAILED": "Fallido"
+    }
+  },
+  "organization": {
+    "title": "Organizaciones",
+    "edit-title": "Editar Organización",
+    "new-title": "Nueva Organización",
+    "name": "Nombre",
+    "status": "Estado",
+    "plan": "Plan de suscripción",
+    "plan-label": "Plan",
+    "status-active": "Activa",
+    "status-inactive": "Inactiva",
+    "create": "Crear organización",
+    "update": "Actualizar organización",
+    "cancel": "Cancelar",
+    "enter": "Entrar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "delete-confirm": "¿Está seguro de que desea eliminar esta organización?",
+    "no-organizations": "No hay organizaciones registradas.",
+    "members": "Miembros",
+    "addMember": "Agregar Miembro",
+    "noMembers": "No hay miembros en esta organización.",
+    "removeMember": "Eliminar miembro",
+    "removeMemberConfirm": "¿Estás seguro de que deseas eliminar este miembro de la organización?",
+    "searchMember": "Buscar miembro",
+    "searchMemberPlaceholder": "Buscar por nombre o email...",
+    "searchHint": "Escribe el nombre o email del miembro que deseas encontrar",
+    "subscription-end": "Fin de suscripción",
+    "wizard": {
+      "selectPlan": "Selecciona tu Plan",
+      "selectPlanSubtitle": "Elige el plan que mejor se adapte a tu organización",
+      "selectPlanButton": "Seleccionar Plan",
+      "selectDuration": "Selecciona la Duración",
+      "selectDurationSubtitle": "¿Por cuánto tiempo deseas suscribirte?",
+      "selectDurationButton": "Seleccionar",
+      "organizationDetails": "Detalles de la Organización",
+      "organizationDetailsSubtitle": "Paso final: nombra tu organización",
+      "summary": "Resumen",
+      "duration": "Duración",
+      "month": "mes",
+      "months": "meses",
+      "organizationName": "Nombre de la Organización",
+      "organizationNameRequired": "El nombre de la organización es requerido",
+      "back": "Atrás",
+      "creating": "Creando...",
+      "createOrganization": "Crear Organización"
+    },
+    "plans": {
+      "AGRO_START": {
+        "name": "Agro Start",
+        "benefits": {
+          "plots": "Hasta 5 parcelas",
+          "monitoring": "Monitoreo básico",
+          "support": "Soporte por email"
+        }
+      },
+      "AGRO_SMART": {
+        "name": "Agro Smart",
+        "benefits": {
+          "plots": "Hasta 20 parcelas",
+          "monitoring": "Monitoreo avanzado",
+          "support": "Soporte prioritario",
+          "analytics": "Panel de análisis"
+        }
+      },
+      "AGRO_EXPERT": {
+        "name": "Agro Expert",
+        "benefits": {
+          "plots": "Parcelas ilimitadas",
+          "monitoring": "Monitoreo premium",
+          "support": "Soporte 24/7",
+          "analytics": "Análisis avanzados",
+          "reports": "Reportes personalizados"
+        }
+      }
+    },
+    "durations": {
+      "1": "1 Mes",
+      "3": "3 Meses",
+      "12": "12 Meses"
+    },
+    "payment": {
+      "title": "Complete el Pago de su Suscripción",
+      "organizationName": "Organización",
+      "paymentInfo": "Información de Pago",
+      "securePayment": "Procesamiento seguro de pagos",
+      "simulationBanner": "Esta es una simulación. No se procesará ningún pago real.",
+      "cardNumber": "Número de Tarjeta",
+      "cardNumberPlaceholder": "1234 5678 9012 3456",
+      "expiryDate": "Fecha de Vencimiento",
+      "expiryDatePlaceholder": "MM/AA",
+      "cvv": "CVV",
+      "cvvPlaceholder": "123",
+      "cancel": "Cancelar",
+      "completePayment": "Completar Pago",
+      "processing": "Procesando...",
+      "securityInfo": "Su información de pago es segura y está encriptada",
+      "errors": {
+        "cardNumberRequired": "El número de tarjeta es requerido",
+        "cardNumberInvalid": "El número de tarjeta debe tener 16 dígitos",
+        "expiryDateRequired": "La fecha de vencimiento es requerida",
+        "expiryDateInvalid": "El formato debe ser MM/AA",
+        "cvvRequired": "El CVV es requerido",
+        "cvvInvalid": "El CVV debe tener 3-4 dígitos"
+      }
+    },
+    "error": {
+      "name-required": "El nombre de la organización es obligatorio."
+    }
+  },
+  "plot": {
+    "plantType": "Tipo de planta",
+    "selectPlantType": "Selecciona el tipo de planta",
+    "searchPlantType": "Buscar tipo de planta",
+    "searchPlaceholder": "Escribe para buscar...",
+    "addNewPlantType": "Añadir nuevo tipo",
+    "newPlantTypeName": "Nombre del nuevo tipo de planta",
+    "placeholderNewType": "Ejemplo: Quinua, Yuca, Mango...",
+    "newTitle": "Registrar nueva parcela",
+    "editTitle": "Editar parcela",
+    "name": "Nombre de la parcela",
+    "area": "Área (hectáreas)",
+    "unit": "Unidad",
+    "location": "Ubicación",
+    "error": {
+      "nameRequired": "El nombre es obligatorio",
+      "areaRequired": "El área es obligatoria",
+      "areaMin": "El área mínima debe ser 0.1 hectáreas"
+    },
+    "title": "Parcelas registradas",
+    "create": "Agregar parcela",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Estás seguro de eliminar esta parcela?",
+    "edit": "Editar",
+    "no-plots": "No hay parcelas registradas.",
+    "no-location": "Sin ubicación registrada"
+  },
+  "actions": {
+    "save": "Guardar",
+    "update": "Actualizar",
+    "cancel": "Cancelar",
+    "back": "Volver"
+  },
+  "custom": "Personalizado",
+  "monitoring": {
+    "title": "Monitoreo Ambiental",
+    "new-reading": "Nueva Lectura",
+    "readings-list": "Lista de Lecturas",
+    "readings-found": "lecturas encontradas",
+    "active-alerts": "Alertas Activas",
+    "clear-alerts": "Limpiar Alertas",
+    "no-readings": "No hay lecturas registradas",
+    "organization-plots": "Parcelas de la Organización",
+    "plot": "Parcela",
+    "type": "Tipo",
+    "value": "Valor",
+    "unit": "Unidad",
+    "measuredAt": "Fecha de Medición",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "loading": "Cargando lecturas...",
+    "form": {
+      "title": "Registrar Lectura Ambiental",
+      "subtitle": "Registra una nueva lectura ambiental para monitorear tus cultivos",
+      "plotSection": "Seleccionar Parcela",
+      "typeSection": "Tipo de Lectura",
+      "valueSection": "Valor de la Medición",
+      "dateSection": "Fecha y Hora",
+      "plotHint": "Selecciona la parcela donde se realizará la lectura",
+      "dateHint": "La lectura se registrará con la fecha y hora actual",
+      "saving": "Guardando...",
+      "selectType": "Por favor selecciona un tipo de lectura",
+      "enterValue": "Ingresa un valor válido",
+      "success": "Lectura guardada exitosamente"
+    },
+    "types": {
+      "TEMPERATURE": "Temperatura",
+      "HUMIDITY": "Humedad",
+      "PH_LEVEL": "Nivel pH"
+    },
+    "hints": {
+      "temperature": "Rango normal: 15-35°C",
+      "humidity": "Rango normal: 40-80%",
+      "ph": "Rango normal: 5.5-7.5 pH"
+    },
+    "placeholders": {
+      "temperature": "Ej: 25.5",
+      "humidity": "Ej: 65.2",
+      "ph": "Ej: 6.8",
+      "value": "Ingresa el valor"
+    },
+    "time": {
+      "moment": "Hace un momento",
+      "minutes": "Hace {{count}} min",
+      "hours": "Hace {{count}} horas",
+      "days": "Hace {{count}} días",
+      "week": "Hace más de una semana"
+    }
+  },
+  "tasks": {
+    "title": "Lista de Tareas Agrícolas",
+    "subtitle": "Tareas asignadas por el agrónomo",
+    "assignedBy": "Asignado por:",
+    "dueDate": "Fecha límite:",
+    "filters": {
+      "status": "Estado",
+      "organization": "Organización",
+      "startDate": "Desde",
+      "endDate": "Hasta",
+      "clearFilters": "Limpiar filtros de fecha",
+      "all": "Todos",
+      "allOrganizations": "Todas"
+    },
+    "status": {
+      "pending": "Pendiente",
+      "inProgress": "En Progreso",
+      "completed": "Completado",
+      "cancelled": "Cancelado",
+      "PENDING": "Pendiente",
+      "IN_PROGRESS": "En Progreso",
+      "COMPLETED": "Completado",
+      "CANCELLED": "Cancelado"
+    },
+    "priority": {
+      "high": "Alta",
+      "medium": "Media",
+      "low": "Baja"
+    },
+    "assignNewTask": "Asignar Nueva Tarea",
+    "details": {
+      "organization": "Organización:",
+      "startDate": "Fecha Inicio:",
+      "endDate": "Fecha Fin:",
+      "materials": "Materiales:",
+      "moreMaterials": "materiales más",
+      "loading": "Cargando..."
+    },
+    "viewDetails": "Ver Detalles",
+    "emptyState": {
+      "title": "No hay tareas que coincidan con los filtros",
+      "subtitle": "Intenta cambiar los filtros para ver más tareas"
+    },
+    "categories": {
+      "irrigation": "Riego",
+      "fertilization": "Fertilización",
+      "pest_control": "Control de plagas",
+      "harvest": "Cosecha",
+      "soil_preparation": "Preparación del suelo",
+      "monitoring": "Monitoreo",
+      "maintenance": "Mantenimiento"
+    },
+    "list": {
+      "task1": {
+        "title": "Revisar sistema de riego por goteo",
+        "description": "Inspeccionar todos los goteros y verificar que no haya obstrucciones en las líneas principales.",
+        "category": "irrigation"
+      },
+      "task2": {
+        "title": "Aplicar fertilizante NPK 15-15-15",
+        "description": "Aplicar 50kg por hectárea de fertilizante NPK en las parcelas de tomate. Regar inmediatamente después.",
+        "category": "fertilization"
+      },
+      "task3": {
+        "title": "Monitorear presencia de pulgones",
+        "description": "Revisar el envés de las hojas en busca de pulgones. Documentar cualquier signo de infestación.",
+        "category": "pest_control"
+      },
+      "task4": {
+        "title": "Medir pH del suelo en parcela norte",
+        "description": "Tomar 5 muestras de suelo a 15cm de profundidad y medir el pH. Registrar resultados.",
+        "category": "monitoring"
+      },
+      "task5": {
+        "title": "Podar ramas secas en frutales",
+        "description": "Eliminar ramas muertas, enfermas o que crezcan hacia adentro en los árboles frutales.",
+        "category": "maintenance"
+      },
+      "task6": {
+        "title": "Preparar camas de siembra",
+        "description": "Labrar el suelo, incorporar compost y formar camas de 1.2m de ancho para la nueva siembra.",
+        "category": "soil_preparation"
+      },
+      "task7": {
+        "title": "Cosechar lechugas maduras",
+        "description": "Cosechar lechugas que hayan alcanzado el tamaño comercial. Cortar en horas frescas del día.",
+        "category": "harvest"
+      },
+      "task8": {
+        "title": "Aplicar tratamiento preventivo contra hongos",
+        "description": "Rociar fungicida preventivo en cultivos susceptibles. Usar equipo de protección personal.",
+        "category": "pest_control"
+      }
+    },
+    "actions": {
+      "markCompleted": "Marcar como completada",
+      "markPending": "Marcar como pendiente",
+      "viewDetails": "Ver detalles"
+    }
+  },
+  "PLANT_REGISTRATION": {
+    "TITLE": "Registro de plantas de parcela",
+    "ORGANIZATION": "Organización",
+    "PLOT": "Parcela",
+    "SELECT_ORGANIZATION": "Seleccione una organización",
+    "SELECT_PLOT": "Seleccione una parcela",
+    "NO_PLOTS_AVAILABLE": "No hay parcelas disponibles para esta organización",
+    "HEIGHT": "Altura (cm)",
+    "LEAVES": "Número de hojas",
+    "FRUITS": "Número de frutos",
+    "DATE": "Fecha de registro",
+    "ADD": "Agregar planta",
+    "ADD_TO_SESSION": "Agregar a sesión",
+    "ADD_RECORD": "Agregar registro",
+    "LIST_TITLE": "Plantas registradas",
+    "SESSION_PLANTS": "Plantas en esta sesión",
+    "CALCULATE_AVERAGE": "Calcular promedio",
+    "CLEAR_SESSION": "Limpiar sesión",
+    "AVERAGE_TITLE": "Promedio de la muestra",
+    "PLANTS_COUNT": "Cantidad de plantas",
+    "SAVE_SESSION": "Guardar registro promediado",
+    "NO_RECORDS": "No hay registros de plantas disponibles",
+    "BACK_TO_LIST": "Volver a la lista"
+  },
+  "weather": {
+    "title": "Estado del Clima",
+    "subtitle": "Monitoreo meteorológico para agricultura",
+    "location": "Ubicación Actual",
+    "defaultLocation": "Puno",
+    "loading": "Cargando datos del clima...",
+    "refresh": "Actualizar clima",
+    "changeLocation": "Cambiar ubicación",
+    "locationLabel": "Ciudad o región",
+    "locationPlaceholder": "Ej: Lima, Arequipa, Cusco, Peru",
+    "locationInstruction": "Ingresa el nombre de tu ciudad, región o país para obtener el clima local.",
+    "applyLocation": "Aplicar ubicación",
+    "status": {
+      "optimal": "Condiciones óptimas",
+      "suboptimal": "Condiciones no óptimas"
+    },
+    "alerts": {
+      "title": "Alertas Climáticas",
+      "frost_risk": "⚠️ Riesgo de heladas - Proteger cultivos sensibles",
+      "heat_stress": "🔥 Estrés térmico extremo - Riesgo crítico para los cultivos",
+      "cold_warning": "❄️ Temperaturas bajas - Monitorear cultivos de cerca",
+      "high_heat": "☀️ Calor elevado - Aumentar frecuencia de riego",
+      "storm_warning": "⛈️ Tormenta en curso - Suspender actividades al aire libre",
+      "flooding_risk": "💧 Riesgo de inundación - Verificar drenajes",
+      "strong_winds": "💨 Vientos fuertes - Revisar soportes y estructuras"
+    },
+    "recommendations": {
+      "title": "Recomendaciones Agrícolas",
+      "protect_frost": "🛡️ Cubrir cultivos sensibles con mantas térmicas o plástico",
+      "avoid_watering_morning": "⏰ Evitar riego en horas de la mañana para prevenir congelamiento",
+      "increase_irrigation": "💧 Incrementar la frecuencia de riego debido al calor",
+      "provide_shade": "🌳 Proporcionar sombra artificial a cultivos delicados",
+      "optimal_growth": "✅ Temperatura ideal para el crecimiento de la mayoría de cultivos",
+      "suspend_irrigation": "🚫 Suspender el riego programado debido a las lluvias",
+      "check_drainage": "🔍 Verificar que los sistemas de drenaje estén funcionando correctamente",
+      "monitor_soil_moisture": "📊 Monitorear los niveles de humedad del suelo regularmente",
+      "water_evening": "🌙 Regar en horas de la tarde/noche para reducir evaporación",
+      "postpone_activities": "⏸️ Posponer actividades de campo hasta que pase la tormenta",
+      "secure_structures": "🔒 Asegurar invernaderos, mallas y estructuras temporales",
+      "check_supports": "🌱 Verificar tutores y soportes de plantas altas"
+    },
+    "info": {
+      "title": "Rangos de Temperatura para Cultivos",
+      "optimal_range": "Rango Óptimo",
+      "warning_range": "Precaución",
+      "danger_range": "Peligro"
+    },
+    "empty": {
+      "title": "No hay datos disponibles",
+      "subtitle": "No se pudieron cargar los datos del clima",
+      "action": "Reintentar"
+    }
+  },
+  "page-not-found": {
+    "title": "Página no encontrada",
+    "content": "La ruta <strong>{{ invalid_path }}</strong> es inválida.",
+    "go-home": "Ir a Inicio"
+  },
+  "members": {
+    "button-back": "Volver a organizaciones",
+    "title": "Miembros de la organización",
+    "button-add": "Agregar",
+    "select": "Selecciona un perfil"
+  },
+  "plantSessions": {
+    "title": "Sesiones de Muestreo de Plantas",
+    "session": "Sesión",
+    "sessions": "sesiones",
+    "loading": "Cargando sesiones...",
+    "loadingDetails": "Cargando detalles de la sesión...",
+    "saving": "Guardando...",
+    "noOrganizations": "No hay organizaciones disponibles",
+    "createOrganizationFirst": "Crea una organización primero para comenzar el muestreo",
+    "goToOrganizations": "Ir a Organizaciones",
+    "noPlots": "No hay parcelas registradas para esta organización",
+    "noSessionsForPlot": "No hay sesiones de muestreo para esta parcela",
+    "createFirst": "Crear primera sesión",
+    "addSession": "Agregar Nueva Sesión",
+    "viewDetails": "Ver Detalles",
+    "delete": "Eliminar",
+    "deleteSession": "Eliminar Sesión",
+    "deleteConfirm": "¿Estás seguro de que deseas eliminar esta sesión de muestreo? Esta acción no se puede deshacer.",
+    "backToList": "Volver a la Lista",
+    "sessionDetails": "Detalles de la Sesión",
+    "generalInfo": "Información General",
+    "sampledAt": "Muestreado el",
+    "plotId": "ID de Parcela",
+    "totalObservations": "Total de Observaciones",
+    "averages": "Promedios Calculados",
+    "avgHeight": "Altura Prom.",
+    "avgLeaves": "Hojas Prom.",
+    "avgFruits": "Frutos Prom.",
+    "observations": "Observaciones de Plantas",
+    "observationId": "ID",
+    "height": "Altura",
+    "leaves": "Hojas",
+    "fruits": "Frutos",
+    "notes": "Notas",
+    "actions": "Acciones",
+    "edit": "Editar",
+    "addObservation": "Agregar Observación",
+    "addFirstObservation": "Agregar Primera Observación",
+    "noObservations": "No hay observaciones registradas aún",
+    "sessionNotFound": "Sesión no encontrada",
+    "createSession": "Crear Sesión de Muestreo",
+    "selectPlot": "Seleccionar Parcela",
+    "plot": "Parcela",
+    "selectPlotOption": "Selecciona una parcela",
+    "addToList": "Agregar a la Lista",
+    "observationsList": "Lista de Observaciones",
+    "noObservationsYet": "No se han agregado observaciones aún. Agrega plantas para calcular promedios.",
+    "calculatedAverages": "Promedios Calculados",
+    "saveSession": "Guardar Sesión",
+    "cancel": "Cancelar",
+    "editObservation": "Editar Observación",
+    "saveObservation": "Guardar Observación",
+    "updateObservation": "Actualizar Observación",
+    "leafCount": "Número de Hojas",
+    "fruitCount": "Número de Frutos",
+    "heightHint": "Mide la altura de la planta en centímetros",
+    "leafCountHint": "Cuenta el número total de hojas",
+    "fruitCountHint": "Cuenta los frutos visibles",
+    "notesPlaceholder": "Observaciones adicionales sobre la planta...",
+    "preview": "Vista Previa",
+    "samples": "muestras"
+  }
+
+}

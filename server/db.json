@@ -1,0 +1,493 @@
+{
+  "profiles": [
+    {
+      "id": 1,
+      "name": "Ing. Agrónomo",
+      "avatarUrl": "https://i.pravatar.cc/100?u=agro"
+    },
+    {
+      "id": 2,
+      "name": "Farmer Demo",
+      "avatarUrl": "https://i.pravatar.cc/100?u=farmer"
+    },
+    {
+      "id": 3,
+      "name": "Test Two",
+      "avatarUrl": "https://i.pravatar.cc/100?u=test2"
+    },
+    {
+      "id": 4,
+      "name": "Hola Prueba",
+      "avatarUrl": "https://i.pravatar.cc/100?u=hola"
+    }
+  ],
+  "organizations": [
+    {
+      "id": 2,
+      "name": "EcoHarvest Perúu",
+      "ownerProfileId": 2,
+      "members": [
+        4,
+        3
+      ],
+      "status": "active",
+      "subscription": {
+        "id": 4274,
+        "plan": "AgroStart",
+        "startDate": "2025-10-07T21:10:17.885Z",
+        "endDate": "2025-11-07T21:10:17.885Z",
+        "status": "Active"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Campos del Sur SRL",
+      "ownerProfileId": 106,
+      "members": [],
+      "status": "inactive",
+      "subscription": {
+        "id": 3,
+        "plan": "AgroStart",
+        "startDate": "2024-07-01T00:00:00Z",
+        "endDate": "2024-08-01T00:00:00Z",
+        "status": "Expired"
+      }
+    },
+    {
+      "id": 4,
+      "name": "BioSierra Consulting",
+      "ownerProfileId": 107,
+      "members": [
+        108,
+        109,
+        110
+      ],
+      "status": "active",
+      "subscription": {
+        "id": 4,
+        "plan": "AgroExpert",
+        "startDate": "2025-05-05T00:00:00Z",
+        "endDate": "2025-06-05T00:00:00Z",
+        "status": "Active"
+      }
+    },
+    {
+      "id": 1759728302399,
+      "name": "HolaDiego",
+      "ownerProfileId": 1,
+      "members": [],
+      "status": "active",
+      "subscription": {
+        "id": 75,
+        "plan": "AgroStart",
+        "startDate": "2025-10-06T05:25:02.399Z",
+        "endDate": "2025-11-06T05:25:02.399Z",
+        "status": "Active"
+      }
+    },
+    {
+      "id": 1759871414138,
+      "name": "EcoTrack",
+      "ownerProfileId": 1,
+      "members": [],
+      "status": "active",
+      "subscription": {
+        "id": 3969,
+        "plan": "AgroStart",
+        "startDate": "2025-10-07T21:10:14.138Z",
+        "endDate": "2025-11-07T21:10:14.138Z",
+        "status": "Active"
+      }
+    },
+    {
+      "id": 1761553821044,
+      "name": "Demy",
+      "ownerProfileId": 1,
+      "members": [],
+      "status": "active",
+      "subscription": {
+        "id": 9081,
+        "plan": "AgroStart",
+        "startDate": "2025-10-27T08:30:21.044Z",
+        "endDate": "2025-11-27T08:30:21.044Z",
+        "status": "Active"
+      }
+    },
+    {
+      "id": 1761554771529,
+      "name": "Coco",
+      "ownerProfileId": 1,
+      "members": [
+        2,
+        4
+      ],
+      "status": "active",
+      "subscription": {
+        "id": 3578,
+        "plan": "AgroStart",
+        "startDate": "2025-10-27T08:46:11.529Z",
+        "endDate": "2025-11-27T08:46:11.529Z",
+        "status": "Active"
+      }
+    },
+    {
+      "id": 1761556181031,
+      "name": "Bandicoot",
+      "ownerProfileId": 4,
+      "members": [],
+      "status": "active",
+      "subscription": {
+        "id": 9145,
+        "plan": "AgroStart",
+        "startDate": "2025-10-27T09:09:41.031Z",
+        "endDate": "2025-11-27T09:09:41.031Z",
+        "status": "Active"
+      }
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": 1,
+      "plan": "AgroSmart",
+      "startDate": "2025-01-15T00:00:00Z",
+      "endDate": "2025-02-15T00:00:00Z",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "plan": "AgroExpert",
+      "startDate": "2025-03-10T00:00:00Z",
+      "endDate": "2025-04-10T00:00:00Z",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "plan": "AgroStart",
+      "startDate": "2024-07-01T00:00:00Z",
+      "endDate": "2024-08-01T00:00:00Z",
+      "status": "Expired"
+    },
+    {
+      "id": 4,
+      "plan": "AgroExpert",
+      "startDate": "2025-05-05T00:00:00Z",
+      "endDate": "2025-06-05T00:00:00Z",
+      "status": "Active"
+    }
+  ],
+  "planttypes": [
+    {
+      "id": 1,
+      "name": "Tomate",
+      "type": "TOMATO",
+      "isCustom": false
+    },
+    {
+      "id": 2,
+      "name": "Maíz",
+      "type": "CORN",
+      "isCustom": false
+    },
+    {
+      "id": 3,
+      "name": "Papa",
+      "type": "POTATO",
+      "isCustom": false
+    },
+    {
+      "id": 4,
+      "name": "Lechuga",
+      "type": "LETTUCE",
+      "isCustom": false
+    },
+    {
+      "id": 5,
+      "name": "Zanahoria",
+      "type": "CARROT",
+      "isCustom": false
+    },
+    {
+      "id": 6,
+      "name": "Trigo",
+      "type": "WHEAT",
+      "isCustom": false
+    },
+    {
+      "id": 7,
+      "name": "Cebada",
+      "type": "BARLEY",
+      "isCustom": false
+    },
+    {
+      "id": 8,
+      "name": "Café",
+      "type": "COFFEE",
+      "isCustom": false
+    },
+    {
+      "id": 9,
+      "name": "Arroz",
+      "type": "RICE",
+      "isCustom": false
+    },
+    {
+      "id": 1759947635387,
+      "name": "Camonte",
+      "type": "Custom",
+      "isCustom": true
+    },
+    {
+      "id": 1759956231524,
+      "name": "Quinua",
+      "type": "Custom",
+      "isCustom": true
+    }
+  ],
+  "plots": [
+    {
+      "id": 1,
+      "name": "Parcela Norte",
+      "area": 2.5,
+      "location": "Sector Norte - Campo A",
+      "organizationId": 2,
+      "plantType": {
+        "id": 1,
+        "name": "Tomate",
+        "type": "TOMATO",
+        "isCustom": false
+      }
+    },
+    {
+      "id": 2,
+      "name": "Campo de Maíz",
+      "area": 5,
+      "location": "Sector Este - Lote 3",
+      "organizationId": 2,
+      "plantType": {
+        "id": 2,
+        "name": "Maíz",
+        "type": "CORN",
+        "isCustom": false
+      }
+    },
+    {
+      "id": 3,
+      "name": "Huerto de Lechugas",
+      "area": 1.2,
+      "location": "Invernadero Central",
+      "organizationId": 3,
+      "plantType": {
+        "id": 4,
+        "name": "Lechuga",
+        "type": "LETTUCE",
+        "isCustom": false
+      }
+    },
+    {
+      "id": 4,
+      "name": "Plantación de Café",
+      "area": 8.7,
+      "location": "Montaña Sur - Terraza 2",
+      "organizationId": 4,
+      "plantType": {
+        "id": 8,
+        "name": "Café",
+        "type": "COFFEE",
+        "isCustom": false
+      }
+    },
+    {
+      "id": 5,
+      "name": "Campo Experimental",
+      "area": 3.3,
+      "location": "Zona de Investigación",
+      "organizationId": 2,
+      "plantType": {
+        "id": 1759947635387,
+        "name": "Camonte",
+        "type": "CUSTOM",
+        "isCustom": true
+      }
+    },
+    {
+      "id": 1759955735756,
+      "name": "Culivos Pepe",
+      "area": 5,
+      "location": "Cajamarca",
+      "plantType": {
+        "id": 5,
+        "name": "Zanahoria",
+        "type": "CARROT",
+        "isCustom": false
+      },
+      "organizationId": 1759728302399
+    },
+    {
+      "id": 1759956231527,
+      "name": "Cultivos Diego",
+      "area": 3,
+      "location": "Casa de Diego ",
+      "plantType": {
+        "id": 1759956231524,
+        "name": "Quinua",
+        "type": "Custom",
+        "isCustom": true
+      },
+      "organizationId": 1759728302399
+    }
+  ],
+  "reports": [],
+  "environmental-readings": [
+    {
+      "id": 1,
+      "plotId": 1,
+      "type": "TEMPERATURE",
+      "value": 23.5,
+      "unit": "°C",
+      "measuredAt": "2025-01-09T08:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "plotId": 1,
+      "type": "HUMIDITY",
+      "value": 65.2,
+      "unit": "%",
+      "measuredAt": "2025-01-09T08:30:00.000Z"
+    },
+    {
+      "id": 3,
+      "plotId": 1,
+      "type": "PH_LEVEL",
+      "value": 6.8,
+      "unit": "pH",
+      "measuredAt": "2025-01-09T08:30:00.000Z"
+    },
+    {
+      "id": 4,
+      "plotId": 2,
+      "type": "TEMPERATURE",
+      "value": 28.3,
+      "unit": "°C",
+      "measuredAt": "2025-01-09T09:15:00.000Z"
+    },
+    {
+      "id": 5,
+      "plotId": 2,
+      "type": "HUMIDITY",
+      "value": 72.1,
+      "unit": "%",
+      "measuredAt": "2025-01-09T09:15:00.000Z"
+    },
+    {
+      "id": 6,
+      "plotId": 2,
+      "type": "PH_LEVEL",
+      "value": 7.2,
+      "unit": "pH",
+      "measuredAt": "2025-01-09T09:15:00.000Z"
+    },
+    {
+      "id": 7,
+      "plotId": 3,
+      "type": "TEMPERATURE",
+      "value": 18.7,
+      "unit": "°C",
+      "measuredAt": "2025-01-09T10:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "plotId": 3,
+      "type": "HUMIDITY",
+      "value": 85.5,
+      "unit": "%",
+      "measuredAt": "2025-01-09T10:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "plotId": 4,
+      "type": "TEMPERATURE",
+      "value": 22.1,
+      "unit": "°C",
+      "measuredAt": "2025-01-09T11:30:00.000Z"
+    },
+    {
+      "id": 10,
+      "plotId": 4,
+      "type": "HUMIDITY",
+      "value": 58.3,
+      "unit": "%",
+      "measuredAt": "2025-01-09T11:30:00.000Z"
+    },
+    {
+      "id": 1759988463887,
+      "plotId": 1,
+      "type": "PH_LEVEL",
+      "value": 13,
+      "unit": "°C",
+      "measuredAt": "2025-10-09T05:41:03.887Z"
+    },
+    {
+      "id": 1759990692944,
+      "plotId": 2,
+      "type": "TEMPERATURE",
+      "value": 26,
+      "unit": "°C",
+      "measuredAt": "2025-10-09T06:18:12.944Z"
+    },
+    {
+      "id": 1759991159461,
+      "plotId": 1,
+      "type": "HUMIDITY",
+      "value": 34,
+      "unit": "%",
+      "measuredAt": "2025-10-09T06:25:59.461Z"
+    },
+    {
+      "id": 1759991286170,
+      "plotId": 2,
+      "type": "TEMPERATURE",
+      "value": 22,
+      "unit": "°C",
+      "measuredAt": "2025-10-09T06:28:06.170Z"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "agronomo@agrotrack.com",
+      "passwordHash": "123456",
+      "role": "AGRONOMIST",
+      "status": "ACTIVE",
+      "name": "Ing. Agrónomo",
+      "avatarUrl": "https://i.pravatar.cc/100?u=agronomo@agrotrack.com"
+    },
+    {
+      "id": 2,
+      "email": "farmer@agrotrack.com",
+      "passwordHash": "123456",
+      "role": "FARMER",
+      "status": "ACTIVE",
+      "name": "Farmer Demo",
+      "avatarUrl": "https://i.pravatar.cc/100?u=farmer@agrotrack.com"
+    },
+    {
+      "id": 3,
+      "email": "test2@gmail.com",
+      "passwordHash": "1234",
+      "role": "FARMER",
+      "status": "ACTIVE",
+      "name": "Sofia Mia",
+      "avatarUrl": "https://avatar.iran.liara.run/public/60"
+    },
+    {
+      "id": 4,
+      "email": "hola@prueba.com",
+      "passwordHash": "12",
+      "role": "AGRONOMIST",
+      "status": "ACTIVE",
+      "name": "Hola Prueba",
+      "avatarUrl": "https://i.pravatar.cc/100?u=hola@prueba.com"
+    }
+  ]
+}
+

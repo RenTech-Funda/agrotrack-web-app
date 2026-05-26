@@ -1,0 +1,121 @@
+<div class="plot-form">
+  <h1 class="title">
+    {{ (isEdit ? 'plot.editTitle' : 'plot.newTitle') | translate }}
+  </h1>
+
+  <!-- Step 1: Select Plant Type -->
+  @if (currentStep === 'selectPlantType') {
+    <div class="plant-type-selection">
+      <h2>{{ 'plot.selectPlantType' | translate }}</h2>
+      
+      <mat-form-field appearance="fill" class="full-width search-field">
+        <mat-label>{{ 'plot.searchPlantType' | translate }}</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput [formControl]="searchControl" placeholder="{{ 'plot.searchPlaceholder' | translate }}" />
+        @if (searchControl.value) {
+          <button matSuffix mat-icon-button (click)="searchControl.setValue('')">
+            <mat-icon>clear</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+
+      <div class="plant-types-grid">
+        @if (plantTypesList().length === 0) {
+          <p class="no-results">{{ 'plot.noPlantTypesFound' | translate }}</p>
+        }
+        @for (plantType of plantTypesList(); track plantType.id) {
+          <mat-card class="plant-type-card" (click)="selectPlantType(plantType)">
+            <mat-card-content>
+              <div class="plant-type-info">
+                <mat-icon class="plant-icon">eco</mat-icon>
+                <div class="plant-details">
+                  <h3>{{ plantType.plantType }}</h3>
+                  <p>{{ plantType.name }}</p>
+                  @if (plantType.description) {
+                    <p class="description">{{ plantType.description }}</p>
+                  }
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        }
+      </div>
+
+      <div class="actions">
+        <button mat-stroked-button color="warn" type="button" (click)="goBack()">
+          {{ 'actions.cancel' | translate }}
+        </button>
+      </div>
+    </div>
+  }
+
+  <!-- Step 2: Fill Plot Details -->
+  @if (currentStep === 'fillDetails') {
+    <div class="plot-details">
+      @if (!isEdit) {
+        <div class="selected-plant-type">
+          <mat-icon>eco</mat-icon>
+          <span>{{ 'plot.selectedPlantType' | translate }}: <strong>{{ selectedPlantTypeName }}</strong></span>
+          <button mat-icon-button color="primary" (click)="goBackToPlantTypeSelection()" matTooltip="{{ 'plot.changePlantType' | translate }}">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      }
+
+      <form [formGroup]="plotForm" (ngSubmit)="submit()">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{ 'plot.name' | translate }}</mat-label>
+          <input matInput formControlName="plotName" required />
+          @if (plotForm.get('plotName')!.touched && plotForm.get('plotName')!.hasError('required')) {
+            <mat-error>{{ 'plot.error.nameRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{ 'plot.area' | translate }}</mat-label>
+          <input matInput type="number" formControlName="size" required />
+          @if (plotForm.get('size')!.hasError('required')) {
+            <mat-error>{{ 'plot.error.areaRequired' | translate }}</mat-error>
+          }
+          @if (plotForm.get('size')!.hasError('min')) {
+            <mat-error>{{ 'plot.error.areaMin' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{ 'plot.unit' | translate }}</mat-label>
+          <mat-select formControlName="unit" required>
+            <mat-option value="hectárea">Hectárea</mat-option>
+            <mat-option value="metro cuadrado">Metro cuadrado</mat-option>
+            <mat-option value="acre">Acre</mat-option>
+          </mat-select>
+          @if (plotForm.get('unit')!.hasError('required')) {
+            <mat-error>{{ 'plot.error.unitRequired' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{ 'plot.location' | translate }}</mat-label>
+          <input matInput formControlName="location" />
+        </mat-form-field>
+
+        <div class="actions">
+          @if (!isEdit) {
+            <button mat-stroked-button type="button" (click)="goBackToPlantTypeSelection()">
+              {{ 'actions.back' | translate }}
+            </button>
+          }
+          @if (isEdit) {
+            <button mat-stroked-button color="warn" type="button" (click)="goBack()">
+              {{ 'actions.cancel' | translate }}
+            </button>
+          }
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="plotForm.invalid || !selectedPlantTypeId">
+            {{ (isEdit ? 'actions.update' : 'actions.save') | translate }}
+          </button>
+        </div>
+      </form>
+    </div>
+  }
+</div>

@@ -1,0 +1,44 @@
+<div class="lang-switch" aria-hidden="false">
+  <button class="lang-btn" [class.active]="activeLang === 'en'" (click)="setLanguage('en')" aria-label="English">EN</button>
+  <button class="lang-btn" [class.active]="activeLang === 'es'" (click)="setLanguage('es')" aria-label="Español">ES</button>
+</div>
+
+<div class="auth-ellipse">
+  <div class="auth-card">
+    <h1 class="logo"><span class="green">Agro</span><span class="orange">Track</span></h1>
+
+    <h2>{{ 'auth.register.title' | translate }}</h2>
+    <p class="subtitle">{{ 'auth.register.subtitle' | translate }}</p>
+
+    <form (ngSubmit)="onRegister()" #form="ngForm">
+      <label>{{ 'auth.register.name' | translate }}</label>
+      <input type="text" [(ngModel)]="name" name="name" required [placeholder]="'auth.register.namePlaceholder' | translate" />
+
+      <label>{{ 'auth.register.email' | translate }}</label>
+      <input type="email" [(ngModel)]="email" name="email" required [placeholder]="'auth.register.emailPlaceholder' | translate" />
+
+      <label>{{ 'auth.register.password' | translate }}</label>
+      <input type="password" [(ngModel)]="password" name="password" required [placeholder]="'auth.register.passwordPlaceholder' | translate" />
+
+      <label>{{ 'auth.register.confirmPassword' | translate }}</label>
+      <input
+        type="password"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        required
+        [placeholder]="'auth.register.passwordPlaceholder' | translate"
+      />
+
+      <div class="roles">
+        <label><input type="checkbox" [(ngModel)]="roleAgronomist" name="agronomist" (change)="roleFarmer = !roleAgronomist"/> {{ 'auth.register.agronomist' | translate }}</label>
+        <label><input type="checkbox" [(ngModel)]="roleFarmer" name="farmer" (change)="roleAgronomist = !roleFarmer"/> {{ 'auth.register.farmer' | translate }}</label>
+      </div>
+
+      <div class="links">
+        <a routerLink="/login">{{ 'auth.register.alreadyHaveAccount' | translate }}</a>
+      </div>
+
+      <button type="submit" [disabled]="store.isLoadingUsers()" class="primary-btn">{{ 'auth.register.createAccount' | translate }}</button>
+    </form>
+  </div>
+</div>

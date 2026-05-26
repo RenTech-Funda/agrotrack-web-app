@@ -1,0 +1,166 @@
+<div class="session-list-container">
+  <h2>{{ 'plantSessions.title' | translate }}</h2>
+
+  <!-- Loading State -->
+  @if (monitoringStore.loading()) {
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>{{ 'plantSessions.loading' | translate }}</p>
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (monitoringStore.error()) {
+    <mat-card class="error-card">
+      <mat-card-content>
+        <mat-icon color="warn">error</mat-icon>
+        <p>{{ monitoringStore.error() }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Empty State -->
+  @if (!monitoringStore.loading() && activeOrganizations().length === 0) {
+    <mat-card class="empty-state">
+      <mat-card-content>
+        <mat-icon>eco</mat-icon>
+        <h3>{{ 'plantSessions.noOrganizations' | translate }}</h3>
+        <p>{{ 'plantSessions.createOrganizationFirst' | translate }}</p>
+        <button mat-raised-button color="primary" routerLink="/organization">
+          {{ 'plantSessions.goToOrganizations' | translate }}
+        </button>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Sessions by Organization and Plot -->
+  @if (!monitoringStore.loading() && activeOrganizations().length > 0) {
+    <div class="organizations-container">
+      @for (org of activeOrganizations(); track org.organizationId) {
+        <mat-card class="organization-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>business</mat-icon>
+              {{ org.organizationName }}
+            </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            @if (getPlotsForOrganization(org.organizationId).length === 0) {
+              <div class="no-plots">
+                <p>{{ 'plantSessions.noPlots' | translate }}</p>
+              </div>
+            } @else {
+              <mat-accordion>
+                @for (plot of getPlotsForOrganization(org.organizationId); track plot.plotId) {
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        <mat-icon>agriculture</mat-icon>
+                        {{ plot.plotName }}
+                        <mat-chip class="session-count">
+                          {{ getSessionsForPlot(plot.plotId).length }}
+                          {{ 'plantSessions.sessions' | translate }}
+                        </mat-chip>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <!-- Sessions List -->
+                    <div class="sessions-list">
+                      @if (getSessionsForPlot(plot.plotId).length === 0) {
+                        <div class="no-sessions">
+                          <p>{{ 'plantSessions.noSessionsForPlot' | translate }}</p>
+                          <button
+                            mat-raised-button
+                            color="primary"
+                            [routerLink]="['/sampling-sessions/new']"
+                            [queryParams]="{ plotId: plot.plotId }">
+                            <mat-icon>add</mat-icon>
+                            {{ 'plantSessions.createFirst' | translate }}
+                          </button>
+                        </div>
+                      } @else {
+                        <div class="sessions-grid">
+                          @for (session of getSessionsForPlot(plot.plotId); track session.id) {
+                            <mat-card
+                              class="session-card"
+                              [routerLink]="['/sampling-sessions', session.id]">
+                              <mat-card-header>
+                                <mat-card-title>
+                                  <mat-icon>science</mat-icon>
+                                  {{ 'plantSessions.session' | translate }} #{{ session.id }}
+                                </mat-card-title>
+                                <mat-card-subtitle>
+                                  {{ formatDate(session.sampledAt) }}
+                                </mat-card-subtitle>
+                              </mat-card-header>
+
+                              <mat-card-content>
+                                <div class="session-stats">
+                                  <div class="stat">
+                                    <mat-icon>height</mat-icon>
+                                    <span class="stat-label">{{ 'plantSessions.avgHeight' | translate }}</span>
+                                    <span class="stat-value">{{ session.average.avgHeightCm }} cm</span>
+                                  </div>
+                                  <div class="stat">
+                                    <mat-icon>local_florist</mat-icon>
+                                    <span class="stat-label">{{ 'plantSessions.avgLeaves' | translate }}</span>
+                                    <span class="stat-value">{{ session.average.avgLeafCount }}</span>
+                                  </div>
+                                  <div class="stat">
+                                    <mat-icon>spa</mat-icon>
+                                    <span class="stat-label">{{ 'plantSessions.avgFruits' | translate }}</span>
+                                    <span class="stat-value">{{ session.average.avgFruitCount }}</span>
+                                  </div>
+                                  <div class="stat">
+                                    <mat-icon>format_list_numbered</mat-icon>
+                                    <span class="stat-label">{{ 'plantSessions.samples' | translate }}</span>
+                                    <span class="stat-value">{{ session.observations.length }}</span>
+                                  </div>
+                                </div>
+                              </mat-card-content>
+
+                              <mat-card-actions>
+                                <button
+                                  mat-button
+                                  color="primary"
+                                  [routerLink]="['/sampling-sessions', session.id]">
+                                  <mat-icon>visibility</mat-icon>
+                                  {{ 'plantSessions.viewDetails' | translate }}
+                                </button>
+                                <button
+                                  mat-button
+                                  color="warn"
+                                  (click)="deleteSession(session.id, $event)"
+                                  [matTooltip]="'plantSessions.delete' | translate">
+                                  <mat-icon>delete</mat-icon>
+                                </button>
+                              </mat-card-actions>
+                            </mat-card>
+                          }
+                        </div>
+
+                        <!-- Add New Session Button -->
+                        <div class="add-session-section">
+                          <button
+                            mat-raised-button
+                            color="accent"
+                            [routerLink]="['/sampling-sessions/new']"
+                            [queryParams]="{ plotId: plot.plotId }">
+                            <mat-icon>add_circle</mat-icon>
+                            {{ 'plantSessions.addSession' | translate }}
+                          </button>
+                        </div>
+                      }
+                    </div>
+                  </mat-expansion-panel>
+                }
+              </mat-accordion>
+            }
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+</div>
+
