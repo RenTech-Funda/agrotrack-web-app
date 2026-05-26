@@ -1,24 +1,69 @@
-.container-with-spacing {
+.pnf-wrapper {
+  min-height: 100vh;
+  background: var(--gradient-hero);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 80px;
-  min-height: calc(100vh - 80px);
+  padding: var(--space-6);
+}
+
+.pnf-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-12) var(--space-10);
+  max-width: 480px;
+  width: 100%;
   text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+/* ─── Illustration ──────────────────────────────────────────── */
+.pnf-illustration {
+  margin-bottom: var(--space-6);
 }
 
-
-button[mat-button] {
+.pnf-code {
   display: block;
-  margin: 1.5rem auto 0;  /* centra horizontalmente */
-  background: #4a7a5c;
-  color: #ffffff;
+  font-size: 6rem;
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--space-4);
+  letter-spacing: -0.04em;
 }
 
+/* Crop-row stripe: a subtle field-inspired decoration */
+.pnf-crop-row {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-primary-500) 0px,
+    var(--color-primary-500) 14px,
+    var(--color-primary-200) 14px,
+    var(--color-primary-200) 28px
+  );
+  opacity: 0.35;
+  margin-inline: var(--space-8);
+}
+
+/* ─── CTA Button ────────────────────────────────────────────── */
+.pnf-btn {
+  min-height: var(--tap-target) !important;
+  width: 100%;
+  border-radius: var(--radius-sm) !important;
+  font-weight: var(--weight-semibold) !important;
+  font-size: var(--text-base) !important;
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .pnf-card {
+    padding: var(--space-8) var(--space-6);
+    border-radius: var(--radius-lg);
+  }
+  .pnf-code { font-size: 4.5rem; }
+}
