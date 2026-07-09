@@ -138,12 +138,12 @@ export class PlantSamplingSessionApiEndpoint {
    */
   createObservation(sessionId: number, observation: PlantObservation): Observable<PlantObservation> {
     const url = `${this.basePath}/${sessionId}/observations`;
-    const resource: PlantObservationResource = {
+    const resource = {
       id: observation.id,
-      heightCm: observation.heightCm,
-      leafCount: observation.leafCount,
-      fruitCount: observation.fruitCount,
-      notes: observation.notes
+      heightCm: Number(observation.heightCm),
+      leafCount: Number(observation.leafCount),
+      fruitCount: Number(observation.fruitCount),
+      notes: observation.notes || ''
     };
     return this.http.post<PlantObservationResource>(url, resource).pipe(
       map((res) => new PlantObservation({

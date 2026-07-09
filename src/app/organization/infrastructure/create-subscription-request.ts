@@ -1,7 +1,6 @@
 export interface CreateSubscriptionRequest {
   subscriptionPlan: string;
-  startDate: string;
-  endDate: string;
+  durationMonths: number;
   organizationName: string;
 }
 

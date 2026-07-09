@@ -151,15 +151,10 @@ export class OrganizationForm {
       return;
     }
 
-    const startDate = new Date();
-    const endDate = new Date();
-    endDate.setMonth(endDate.getMonth() + this.selectedDuration);
-
     this.formSubmitted = true;
     this.store.createOrganizationWithSubscription({
       subscriptionPlan: this.selectedPlan,
-      startDate: startDate.toISOString(),
-      endDate: endDate.toISOString(),
+      durationMonths: this.selectedDuration,
       organizationName: this.form.value.organizationName!
     });
   }
