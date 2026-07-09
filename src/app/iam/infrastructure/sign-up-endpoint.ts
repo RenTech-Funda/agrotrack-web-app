@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {SignUpCommand} from '../domain/model/sign-up.command';
 import {catchError, map} from 'rxjs/operators';
 
-const signUpApiEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderSignUpEndpointPath}`;
+const signUpApiEndpointUrl = `${environment.iamServiceBaseUrl}/authentication/sign-up`;
 
 /**
  * API endpoint for handling user sign-up operations in the infrastructure layer of the IAM bounded context.

@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export class PlotsApiEndpoint extends BaseApiEndpoint<Plot, PlotResource, PlotsResponse, PlotAssembler> {
-  private readonly baseUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderPlotsEndpointPath}`;
+  private readonly baseUrl = `${environment.organizationServiceBaseUrl}/plots`;
 
   constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderPlotsEndpointPath}`, new PlotAssembler());
+    super(http, `${environment.organizationServiceBaseUrl}/plots`, new PlotAssembler());
   }
 
   getByOrganizationId(orgId: number): Observable<Plot[]> {

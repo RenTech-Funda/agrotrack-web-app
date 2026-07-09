@@ -17,7 +17,7 @@ import {GetReportsQuery} from '../domain/model/get-reports.query';
   providedIn: 'root'
 })
 export class ReportEndpoint extends ErrorHandlingEnabledBaseType {
-  private baseUrl = `${environment.platformProviderApiBaseUrl}`; // e.g. /api/v1
+  private baseUrl = `${environment.reportServiceBaseUrl}`;
 
   constructor(
     private http: HttpClient,

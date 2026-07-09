@@ -17,7 +17,7 @@ export class MonitoringApiEndpoint extends BaseApiEndpoint<EnvironmentalReading,
   constructor(http: HttpClient) {
     super(
       http,
-      `${environment.platformProviderApiBaseUrl}${environment.platformProviderEnvironmentalReadingEndpointPath}`,
+      `${environment.monitoringServiceBaseUrl}/environment-readings`,
       new EnvironmentalReadingAssembler()
     );
   }

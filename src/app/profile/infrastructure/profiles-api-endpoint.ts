@@ -13,7 +13,7 @@ export class ProfilesApiEndpoint extends BaseApiEndpoint<
   profile, ProfileResource, ProfileResource[], ProfileAssembler
 > {
   constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}/profiles`, new ProfileAssembler());
+    super(http, `${environment.profileServiceBaseUrl}/profiles`, new ProfileAssembler());
   }
 
 
@@ -21,7 +21,7 @@ export class ProfilesApiEndpoint extends BaseApiEndpoint<
     const params = ids.map(id => `id=${id}`).join('&');
 
     return this.http.get<ProfileResource[]>(
-      `${environment.platformProviderApiBaseUrl}/profiles?${params}`
+      `${environment.profileServiceBaseUrl}/profiles?${params}`
     );
   }
 }

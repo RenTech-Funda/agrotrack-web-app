@@ -15,6 +15,6 @@ export class PlanttypesApiEndpoint extends BaseApiEndpoint<PlantType, PlantTypeR
    * @param http - The HTTP client to use for API requests.
    */
   constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderPlantTypesEndpointPath}`, new PlanttypesAssembler());
+    super(http, `${environment.organizationServiceBaseUrl}/plant-types`, new PlanttypesAssembler());
   }
 }

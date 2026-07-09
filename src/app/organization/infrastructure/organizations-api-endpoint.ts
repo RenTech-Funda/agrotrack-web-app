@@ -10,7 +10,7 @@ import {environment} from '../../../environments/environment';
  */
 export class OrganizationsApiEndpoint extends BaseApiEndpoint<Organization, OrganizationResource, OrganizationsResponse, OrganizationAssembler>{
   constructor(http: HttpClient) {
-    super(http, `${environment.platformProviderApiBaseUrl}${environment.platformProviderOrganizationsEndpointPath}`,new OrganizationAssembler());
+    super(http, `${environment.organizationServiceBaseUrl}/organizations`, new OrganizationAssembler());
   }
 
 }

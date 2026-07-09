@@ -17,7 +17,7 @@ import { PlantSamplingSessionAssembler } from './plant-sampling-session-assemble
 })
 export class PlantSamplingSessionApiEndpoint {
   private readonly assembler = new PlantSamplingSessionAssembler();
-  private readonly basePath = `${environment.platformProviderApiBaseUrl}/plant-sampling-sessions`;
+  private readonly basePath = `${environment.monitoringServiceBaseUrl}/plant-sampling-sessions`;
 
   constructor(private http: HttpClient) {}
 

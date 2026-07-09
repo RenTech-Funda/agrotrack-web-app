@@ -46,7 +46,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable for an array of simplified organization data.
    */
   getOrganizationsByOwner(ownerProfileId: number): Observable<OrganizationByOwnerResponse[]> {
-    const url = `${environment.platformProviderApiBaseUrl}/organizations/by-owner/${ownerProfileId}`;
+    const url = `${environment.organizationServiceBaseUrl}/organizations/by-owner/${ownerProfileId}`;
     return this.http.get<OrganizationByOwnerResponse[]>(url);
   }
 
@@ -56,7 +56,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable for an array of organization data.
    */
   getOrganizationsByProfile(profileId: number): Observable<OrganizationByOwnerResponse[]> {
-    const url = `${environment.platformProviderApiBaseUrl}/organizations/by-profile/${profileId}`;
+    const url = `${environment.organizationServiceBaseUrl}/organizations/by-profile/${profileId}`;
     return this.http.get<OrganizationByOwnerResponse[]>(url);
   }
 
@@ -66,7 +66,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of the created organization response.
    */
   createOrganizationWithSubscription(request: CreateSubscriptionRequest): Observable<CreateSubscriptionResponse> {
-    const url = `${environment.platformProviderApiBaseUrl}/subscriptions`;
+    const url = `${environment.subscriptionServiceBaseUrl}/subscriptions`;
     return this.http.post<CreateSubscriptionResponse>(url, request);
   }
 
@@ -76,7 +76,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of void.
    */
   activateSubscription(subscriptionId: number): Observable<void> {
-    const url = `${environment.platformProviderApiBaseUrl}/subscriptions/${subscriptionId}/activate`;
+    const url = `${environment.subscriptionServiceBaseUrl}/subscriptions/${subscriptionId}/activate`;
     return this.http.put<void>(url, {});
   }
 
@@ -86,7 +86,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of an array of PlotByOrganizationResponse objects.
    */
   getPlotsByOrganization(organizationId: number): Observable<PlotByOrganizationResponse[]> {
-    const url = `${environment.platformProviderApiBaseUrl}/plots/organization/${organizationId}`;
+    const url = `${environment.organizationServiceBaseUrl}/plots/organization/${organizationId}`;
     return this.http.get<PlotByOrganizationResponse[]>(url);
   }
 
@@ -96,7 +96,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of PlantTypeResponse object.
    */
   getPlantTypeById(plantTypeId: number): Observable<PlantTypeResponse> {
-    const url = `${environment.platformProviderApiBaseUrl}/plant-types/${plantTypeId}`;
+    const url = `${environment.organizationServiceBaseUrl}/plant-types/${plantTypeId}`;
     return this.http.get<PlantTypeResponse>(url);
   }
 
@@ -106,7 +106,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of void.
    */
   createPlot(request: CreatePlotRequest): Observable<void> {
-    const url = `${environment.platformProviderApiBaseUrl}/plots`;
+    const url = `${environment.organizationServiceBaseUrl}/plots`;
     return this.http.post<void>(url, request);
   }
 
@@ -116,7 +116,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of ProfileDetailsResponse object.
    */
   getProfileById(profileId: number): Observable<ProfileDetailsResponse> {
-    const url = `${environment.platformProviderApiBaseUrl}/profiles/${profileId}`;
+    const url = `${environment.profileServiceBaseUrl}/profiles/${profileId}`;
     return this.http.get<ProfileDetailsResponse>(url);
   }
 
@@ -126,7 +126,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of an array of ProfileDetailsResponse objects.
    */
   searchProfiles(searchTerm: string): Observable<ProfileDetailsResponse[]> {
-    const url = `${environment.platformProviderApiBaseUrl}/profiles/search?name=${encodeURIComponent(searchTerm)}`;
+    const url = `${environment.profileServiceBaseUrl}/profiles/search?name=${encodeURIComponent(searchTerm)}`;
     return this.http.get<ProfileDetailsResponse[]>(url);
   }
 
@@ -137,7 +137,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of void.
    */
   addProfileToOrganization(organizationId: number, request: AddProfileToOrganizationRequest): Observable<void> {
-    const url = `${environment.platformProviderApiBaseUrl}/organizations/${organizationId}/profiles/add`;
+    const url = `${environment.organizationServiceBaseUrl}/organizations/${organizationId}/profiles/add`;
     return this.http.put<void>(url, request);
   }
 
@@ -148,7 +148,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of void.
    */
   removeProfileFromOrganization(organizationId: number, request: AddProfileToOrganizationRequest): Observable<void> {
-    const url = `${environment.platformProviderApiBaseUrl}/organizations/${organizationId}/profiles/remove`;
+    const url = `${environment.organizationServiceBaseUrl}/organizations/${organizationId}/profiles/remove`;
     return this.http.put<void>(url, request);
   }
 
@@ -157,7 +157,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of an array of PlantTypeResponse objects.
    */
   getAllPlantTypes(): Observable<PlantTypeResponse[]> {
-    const url = `${environment.platformProviderApiBaseUrl}/plant-types`;
+    const url = `${environment.organizationServiceBaseUrl}/plant-types`;
     return this.http.get<PlantTypeResponse[]>(url);
   }
 
@@ -167,7 +167,7 @@ export class OrganizationApi extends BaseApi{
    * @returns An Observable of an array of PlantTypeResponse objects.
    */
   getPlantTypesByName(name: string): Observable<PlantTypeResponse[]> {
-    const url = `${environment.platformProviderApiBaseUrl}/plant-types/by-name/${name}`;
+    const url = `${environment.organizationServiceBaseUrl}/plant-types/by-name/${name}`;
     return this.http.get<PlantTypeResponse[]>(url);
   }
 

@@ -83,7 +83,7 @@ export class Settings implements OnInit {
     if (!this.profileId) return;
 
     this.loading = true;
-    const url = `${environment.platformProviderApiBaseUrl}/profiles/${this.profileId}`;
+    const url = `${environment.profileServiceBaseUrl}/profiles/${this.profileId}`;
 
     this.http.get<ProfileData>(url).subscribe({
       next: (data) => {
@@ -111,7 +111,7 @@ export class Settings implements OnInit {
     }
 
     this.loading = true;
-    const url = `${environment.platformProviderApiBaseUrl}/profiles/${this.profileId}/person-name`;
+    const url = `${environment.profileServiceBaseUrl}/profiles/${this.profileId}/person-name`;
     const body = this.profileForm.value;
 
     this.http.put(url, body).subscribe({
@@ -134,7 +134,7 @@ export class Settings implements OnInit {
     }
 
     this.loading = true;
-    const url = `${environment.platformProviderApiBaseUrl}/profiles/${this.profileId}/photo-url`;
+    const url = `${environment.profileServiceBaseUrl}/profiles/${this.profileId}/photo-url`;
     const body = this.photoForm.value;
 
     this.http.put(url, body).subscribe({

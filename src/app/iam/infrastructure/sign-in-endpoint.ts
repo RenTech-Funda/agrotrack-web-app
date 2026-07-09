@@ -8,7 +8,7 @@ import {SignInResource, SignInResponse} from './sign-in.response';
 import {catchError, map} from 'rxjs/operators';
 
 
-const signInApiEndpointUrl = `${environment.platformProviderApiBaseUrl}${environment.platformProviderSignInEndpointPath}`;
+const signInApiEndpointUrl = `${environment.iamServiceBaseUrl}/authentication/sign-in`;
 
 /**
  * API endpoint for handling user sign-in operations in the infrastructure layer of the IAM bounded context.

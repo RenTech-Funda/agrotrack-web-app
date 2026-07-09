@@ -18,7 +18,7 @@ export class TaskApiEndpoint {
    * Get tasks assigned to a profile (for FARMER role)
    */
   getTasksAssignedTo(assignedToProfileId: number): Observable<Task[]> {
-    const url = `${environment.platformProviderApiBaseUrl}/tasks/assigned/${assignedToProfileId}`;
+    const url = `${environment.monitoringServiceBaseUrl}/tasks/assigned/${assignedToProfileId}`;
     return this.http.get<TaskResource[]>(url).pipe(
       map((resources) => resources.map(resource => this.assembler.toEntityFromResource(resource)))
     );
@@ -28,7 +28,7 @@ export class TaskApiEndpoint {
    * Get tasks created by a profile (for AGRONOMIST role)
    */
   getTasksByAssignee(assigneeProfileId: number): Observable<Task[]> {
-    const url = `${environment.platformProviderApiBaseUrl}/tasks/assignee/${assigneeProfileId}`;
+    const url = `${environment.monitoringServiceBaseUrl}/tasks/assignee/${assigneeProfileId}`;
     return this.http.get<TaskResource[]>(url).pipe(
       map((resources) => resources.map(resource => this.assembler.toEntityFromResource(resource)))
     );
@@ -38,7 +38,7 @@ export class TaskApiEndpoint {
    * Create a new task
    */
   createTask(task: Task): Observable<Task> {
-    const url = `${environment.platformProviderApiBaseUrl}/tasks`;
+    const url = `${environment.monitoringServiceBaseUrl}/tasks`;
     const resource = this.assembler.toResourceFromEntity(task);
     return this.http.post<TaskResource>(url, resource).pipe(
       map((res) => this.assembler.toEntityFromResource(res))
@@ -49,7 +49,7 @@ export class TaskApiEndpoint {
    * Get organization name by ID
    */
   getOrganizationName(organizationId: number): Observable<string> {
-    const url = `${environment.platformProviderApiBaseUrl}/organizations/${organizationId}`;
+    const url = `${environment.organizationServiceBaseUrl}/organizations/${organizationId}`;
     return this.http.get<any>(url).pipe(
       map((org) => org.organizationName || 'Unknown')
     );
@@ -59,7 +59,7 @@ export class TaskApiEndpoint {
    * Update task status
    */
   updateTaskStatus(taskId: number, status: string): Observable<void> {
-    const url = `${environment.platformProviderApiBaseUrl}/tasks/${taskId}/status`;
+    const url = `${environment.monitoringServiceBaseUrl}/tasks/${taskId}/status`;
     return this.http.patch<void>(url, { status });
   }
 
@@ -88,7 +88,7 @@ export class TaskApiEndpoint {
    * Delete a task
    */
   deleteTask(taskId: number): Observable<void> {
-    const url = `${environment.platformProviderApiBaseUrl}/tasks/${taskId}`;
+    const url = `${environment.monitoringServiceBaseUrl}/tasks/${taskId}`;
     return this.http.delete<void>(url);
   }
 }
