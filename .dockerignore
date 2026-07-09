@@ -1,0 +1,22 @@
+# Dependencias instaladas localmente (se reinstalan dentro del build)
+node_modules
+
+# Artefactos de build previos
+dist
+
+# Git y archivos de desarrollo
+.git
+.gitignore
+.editorconfig
+*.md
+
+# Archivos Docker de orquestación (no necesarios dentro del contexto de build)
+Dockerfile
+docker-compose.yml
+
+# Archivos de entorno locales (nunca deben entrar a la imagen)
+.env
+.env.*
+
+# Caché de Angular CLI
+.angular/cache
