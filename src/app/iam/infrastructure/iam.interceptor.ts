@@ -16,7 +16,6 @@ export const iamInterceptor: HttpInterceptorFn = (
   const handledRequest = token
     ? request.clone({headers: request.headers.set('Authorization', `Bearer ${token}`)})
     : request;
-  console.log(token);
   // Return the handled request.
   return next(handledRequest);
 };

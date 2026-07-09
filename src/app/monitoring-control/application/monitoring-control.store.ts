@@ -45,6 +45,9 @@ export class MonitoringStore {
   private readonly observationsSignal = signal<PlantObservation[]>([]);
   readonly observations = this.observationsSignal.asReadonly();
 
+  private readonly sessionSavedSignal = signal<boolean>(false);
+  readonly sessionSaved = this.sessionSavedSignal.asReadonly();
+
   // --- Computed values ---
   readonly readingCount = computed(() => this.readings().length);
   readonly taskCount = computed(() => this.tasks().length);
@@ -493,19 +496,24 @@ export class MonitoringStore {
   createSession(session: PlantSamplingSession): void {
     this.loadingSignal.set(true);
     this.errorSignal.set(null);
+    this.sessionSavedSignal.set(false);
 
     this.plantSamplingApi.createSession(session).subscribe({
       next: (created) => {
-        console.log('Session created:', created);
         this.sessionsSignal.update((sessions) => [...sessions, created]);
         this.loadingSignal.set(false);
+        this.sessionSavedSignal.set(true);
       },
       error: (err) => {
         console.error('Error creating session:', err);
-        // No mostrar error ya que la sesión se crea correctamente
+        this.errorSignal.set(this.formatError(err, 'Failed to create session'));
         this.loadingSignal.set(false);
       }
     });
+  }
+
+  resetSessionSaved(): void {
+    this.sessionSavedSignal.set(false);
   }
 
   /**

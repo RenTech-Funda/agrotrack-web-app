@@ -6,7 +6,8 @@
     "settings": "Settings",
     "monitoring": "Monitoring",
     "sampling_sessions": "Plant Sampling",
-    "weather": "Weather"
+    "weather": "Weather",
+    "ai_scan": "AI Plant Scan"
   },
   "auth": {
     "login": {

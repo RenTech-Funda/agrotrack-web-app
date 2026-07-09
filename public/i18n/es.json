@@ -6,7 +6,8 @@
     "settings": "Ajustes",
     "monitoring": "Monitoreo",
     "sampling_sessions": "Muestreo de Plantas",
-    "weather": "Clima"
+    "weather": "Clima",
+    "ai_scan": "Escaneo IA"
   },
   "auth": {
     "login": {

@@ -47,6 +47,7 @@ export class Layout implements OnInit, OnDestroy{
     { labelKey: 'nav.monitoring',   icon: 'visibility',           route: '/monitoring' },
     { labelKey: 'nav.sampling_sessions', icon: 'science',            route: '/sampling-sessions' },
     { labelKey: 'nav.weather',      icon: 'cloud_queue',          route: '/monitoring/weather' },
+    { labelKey: 'nav.ai_scan',      icon: 'biotech',              route: '/ai-scan' },
     { labelKey: 'nav.settings',     icon: 'settings',             route: '/settings' }
   ];
 

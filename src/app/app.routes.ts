@@ -49,6 +49,11 @@ export const routes: Routes = [
         title: `${baseTitle} | Sampling Sessions`
       },
       {
+        path: 'ai-scan',
+        loadComponent: () => import('./monitoring-control/presentation/views/ai-plant-scan/ai-plant-scan').then(m => m.AiPlantScan),
+        title: `${baseTitle} | Diagnóstico IA`
+      },
+      {
         path: 'settings',
         loadChildren: () => import('./settings/presentation/views/settings.routes').then(m => m.settingsRoutes),
         title: `${baseTitle} | Settings`

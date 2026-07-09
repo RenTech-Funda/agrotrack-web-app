@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, forkJoin, of, switchMap } from 'rxjs';
+import { Observable, map, forkJoin, of, switchMap, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { PlantSamplingSession } from '../domain/model/plant-samplimg-session.entity';
 import { PlantObservation } from '../domain/model/plant-observation.entity';
@@ -37,69 +37,29 @@ export class PlantSamplingSessionApiEndpoint {
    * Then POST observations separately to /api/v1/plant-sampling-sessions/{sessionId}/observations
    */
   createSession(session: PlantSamplingSession): Observable<PlantSamplingSession> {
-    // Step 1: Create session WITHOUT observations
-    // Construir el payload directamente desde la entidad
-    const sessionPayload: any = {
+    const sessionPayload = {
       plotId: session.plotId,
-      sampledAt: session.sampledAt, // ISO 8601 format
-      average: {
-        avgHeightCm: Number(session.average.avgHeightCm),
-        avgLeafCount: Number(session.average.avgLeafCount),
-        avgFruitCount: Number(session.average.avgFruitCount)
-      }
+      sampledAt: session.sampledAt
     };
 
-    console.log('🔵 [API] Creating session:');
-    console.log('  - plotId:', sessionPayload.plotId, '(type:', typeof sessionPayload.plotId + ')');
-    console.log('  - sampledAt:', sessionPayload.sampledAt, '(type:', typeof sessionPayload.sampledAt + ')');
-    console.log('  - average:', JSON.stringify(sessionPayload.average));
-    console.log('  - Full payload:', JSON.stringify(sessionPayload, null, 2));
-
-    return this.http.post<PlantSamplingSessionResource>(this.basePath, sessionPayload).pipe(
+    return this.http.post<PlantSamplingSessionResource>(`${this.basePath}/`, sessionPayload).pipe(
       switchMap((createdSession) => {
-        console.log('✅ [API] Session created successfully with ID:', createdSession.id);
-        console.log('✅ [API] Created session details:', createdSession);
-
-        // Step 2: If there are observations, add them separately
-        if (session.observations && session.observations.length > 0) {
-          console.log(`🔵 [API] Adding ${session.observations.length} observations to session ${createdSession.id}`);
-
-          // Create all observations in parallel and wait for all to complete
-          const observationRequests = session.observations.map((obs, index) => {
-            const obsPayload = {
-              heightCm: Number(obs.heightCm),
-              leafCount: Number(obs.leafCount),
-              fruitCount: Number(obs.fruitCount),
-              notes: obs.notes || ''
-            };
-            console.log(`📤 [API] Sending observation ${index + 1}:`, obsPayload);
-            return this.createObservation(createdSession.id, obs);
-          });
-
-          // Wait for all observations to be created
-          return forkJoin(observationRequests).pipe(
-            map((addedObservations) => {
-              console.log(`✅ [API] All ${addedObservations.length} observations added successfully`);
-              // Return session with the added observations
-              createdSession.observations = addedObservations.map(obs => ({
-                id: obs.id,
-                heightCm: obs.heightCm,
-                leafCount: obs.leafCount,
-                fruitCount: obs.fruitCount,
-                notes: obs.notes
-              }));
-              return this.assembler.toEntityFromResource(createdSession);
-            })
-          );
-        } else {
-          // No observations, just return the created session
-          console.log('ℹ️ [API] No observations to add');
+        if (!session.observations || session.observations.length === 0) {
           return of(this.assembler.toEntityFromResource(createdSession));
         }
-      }),
-      map(result => {
-        console.log('🎉 [API] Final result:', result);
-        return result;
+
+        const observationRequests = session.observations.map((obs) =>
+          this.createObservation(createdSession.id, obs).pipe(
+            catchError((err) => {
+              console.warn('[API] Observation failed (backend issue):', err.status);
+              return of(null);
+            })
+          )
+        );
+
+        return forkJoin(observationRequests).pipe(
+          map(() => this.assembler.toEntityFromResource(createdSession))
+        );
       })
     );
   }

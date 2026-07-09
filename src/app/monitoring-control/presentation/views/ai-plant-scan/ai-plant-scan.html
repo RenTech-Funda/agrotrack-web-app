@@ -1,0 +1,162 @@
+<div class="scan-page">
+
+  <div class="scan-header">
+    <mat-icon class="header-icon">biotech</mat-icon>
+    <div>
+      <h1>Diagnóstico IA de Plantas</h1>
+      <p class="subtitle">Sube una foto de tu planta y el sistema analizará su estado de salud automáticamente.</p>
+    </div>
+  </div>
+
+  <!-- IDLE / UPLOAD ZONE -->
+  @if (state() === 'idle') {
+    <mat-card class="upload-card"
+              (drop)="onDrop($event)"
+              (dragover)="onDragOver($event)">
+      <mat-card-content class="upload-content">
+        <mat-icon class="upload-icon">add_photo_alternate</mat-icon>
+        <h2>Arrastra una imagen aquí</h2>
+        <p>o selecciona una foto de tu dispositivo</p>
+        <button mat-flat-button color="primary" (click)="fileInput.click()">
+          <mat-icon>upload</mat-icon>
+          Seleccionar imagen
+        </button>
+        <input #fileInput type="file" accept="image/*" hidden (change)="onFileSelected($event)">
+        <p class="hint">Formatos soportados: JPG, PNG, WEBP · Máx. 10 MB</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- UPLOADING / ANALYZING -->
+  @if (state() === 'uploading' || state() === 'analyzing') {
+    <mat-card class="analyzing-card">
+      <mat-card-content class="analyzing-content">
+        @if (previewUrl()) {
+          <img [src]="previewUrl()!" class="preview-img" alt="Imagen analizada">
+        }
+        <div class="analyzing-info">
+          <div class="pulse-icon">
+            <mat-icon>biotech</mat-icon>
+          </div>
+          <h2>{{ state() === 'uploading' ? 'Procesando imagen...' : 'Analizando con IA...' }}</h2>
+          <p class="analyzing-step">
+            {{ analyzeProgress() < 40 ? 'Detectando especie vegetal...' :
+               analyzeProgress() < 70 ? 'Identificando patologías...' :
+               analyzeProgress() < 90 ? 'Evaluando estado nutricional...' :
+               'Generando recomendaciones...' }}
+          </p>
+          <mat-progress-bar mode="determinate" [value]="analyzeProgress()" class="progress-bar"></mat-progress-bar>
+          <span class="progress-label">{{ analyzeProgress() }}%</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- RESULTS -->
+  @if (state() === 'done' && result()) {
+    <div class="results-layout">
+
+      <!-- Left: image + summary -->
+      <div class="results-left">
+        <mat-card class="image-card">
+          <img [src]="previewUrl()!" class="result-img" alt="Planta analizada">
+          <div class="image-badge" [class]="statusColor()">
+            <mat-icon>{{ result()!.status === 'healthy' ? 'check_circle' : result()!.status === 'warning' ? 'warning' : 'dangerous' }}</mat-icon>
+            {{ statusLabel() }}
+          </div>
+        </mat-card>
+
+        <mat-card class="score-card">
+          <mat-card-content>
+            <p class="score-label">Índice de salud</p>
+            <div class="score-circle" [class]="statusColor()">
+              <span class="score-number">{{ result()!.healthScore }}</span>
+              <span class="score-max">/100</span>
+            </div>
+            <mat-progress-bar
+              mode="determinate"
+              [value]="result()!.healthScore"
+              [class]="statusColor()">
+            </mat-progress-bar>
+            <p class="species-name">
+              <strong>{{ result()!.commonName }}</strong>
+              <em>{{ result()!.species }}</em>
+            </p>
+          </mat-card-content>
+        </mat-card>
+
+        <button mat-stroked-button (click)="reset()" class="reset-btn">
+          <mat-icon>restart_alt</mat-icon>
+          Analizar otra planta
+        </button>
+      </div>
+
+      <!-- Right: issues + recommendations -->
+      <div class="results-right">
+
+        @if (result()!.issues.length > 0) {
+          <mat-card class="issues-card">
+            <mat-card-header>
+              <mat-icon mat-card-avatar>pest_control</mat-icon>
+              <mat-card-title>Problemas detectados</mat-card-title>
+              <mat-card-subtitle>{{ result()!.issues.length }} problema{{ result()!.issues.length > 1 ? 's' : '' }} identificado{{ result()!.issues.length > 1 ? 's' : '' }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              @for (issue of result()!.issues; track issue.name) {
+                <div class="issue-item">
+                  <div class="issue-header">
+                    <div class="issue-title">
+                      <mat-icon [class]="getSeverityColor(issue.severity)">{{ getSeverityIcon(issue.severity) }}</mat-icon>
+                      <span class="issue-name">{{ issue.name }}</span>
+                      <span class="issue-badge" [class]="getSeverityColor(issue.severity)">{{ getSeverityLabel(issue.severity) }}</span>
+                    </div>
+                    <span class="confidence">{{ issue.confidence }}% confianza</span>
+                  </div>
+                  <p class="issue-desc">{{ issue.description }}</p>
+                  <mat-progress-bar mode="determinate" [value]="issue.confidence" [class]="getSeverityColor(issue.severity)"></mat-progress-bar>
+                </div>
+                <mat-divider></mat-divider>
+              }
+            </mat-card-content>
+          </mat-card>
+        } @else {
+          <mat-card class="no-issues-card">
+            <mat-card-content class="no-issues-content">
+              <mat-icon class="healthy-icon">eco</mat-icon>
+              <h3>Sin problemas detectados</h3>
+              <p>La planta muestra signos óptimos de salud.</p>
+            </mat-card-content>
+          </mat-card>
+        }
+
+        <mat-card class="recommendations-card">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>tips_and_updates</mat-icon>
+            <mat-card-title>Recomendaciones</mat-card-title>
+            <mat-card-subtitle>Acciones sugeridas por el sistema</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <ul class="recommendations-list">
+              @for (rec of result()!.recommendations; track rec) {
+                <li>
+                  <mat-icon class="rec-icon">arrow_right</mat-icon>
+                  {{ rec }}
+                </li>
+              }
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+        <p class="analyzed-at">
+          <mat-icon>schedule</mat-icon>
+          Analizado el {{ result()!.analyzedAt | date:'d MMM yyyy, HH:mm' }}
+          &nbsp;·&nbsp;
+          <mat-icon>smart_toy</mat-icon>
+          Modelo AgroTrack Vision v2.1 (simulado)
+        </p>
+      </div>
+
+    </div>
+  }
+
+</div>

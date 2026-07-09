@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, effect } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -58,6 +58,15 @@ export class PlantSessionForm implements OnInit {
   loadingOrganizations = signal<boolean>(true);
   loadingPlots = signal<boolean>(false);
   plotsError = signal<string | null>(null);
+
+  constructor() {
+    effect(() => {
+      if (this.monitoringStore.sessionSaved()) {
+        this.monitoringStore.resetSessionSaved();
+        this.router.navigate(['/sampling-sessions']);
+      }
+    });
+  }
 
   // Current observation being added
   currentObservation: TempObservation = {
